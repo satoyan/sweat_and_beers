@@ -16,7 +16,7 @@ class DetailScreen extends GetView<DetailController> {
         title: Text(controller.place?.title ?? l10n.detailScreenTitle),
         actions: [
           IconButton(
-            icon: const Icon(Icons.map),
+            icon: Icon(Icons.map, color: Theme.of(context).colorScheme.onSurface),
             onPressed: () => controller.launchMap(),
           ),
         ],
@@ -57,8 +57,10 @@ class DetailScreen extends GetView<DetailController> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.map),
-                        onPressed: () => controller.launchMap(address: details.formattedAddress),
+                        icon: Icon(Icons.map, color: Theme.of(context).colorScheme.onSurface),
+                        onPressed: () => controller.launchMap(
+                          address: details.formattedAddress,
+                        ),
                       ),
                     ],
                   ),
@@ -67,13 +69,14 @@ class DetailScreen extends GetView<DetailController> {
                 // Phone Number
                 if (details.formattedPhoneNumber != null)
                   InkWell(
-                    onTap: () => controller.launchPhone(details.formattedPhoneNumber!),
+                    onTap: () =>
+                        controller.launchPhone(details.formattedPhoneNumber!),
                     child: Text(
                       '${l10n.phoneLabel}: ${details.formattedPhoneNumber}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                            decoration: TextDecoration.underline,
-                          ),
+                        color: Theme.of(context).colorScheme.primary,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 const SizedBox(height: 8),
@@ -121,9 +124,6 @@ class DetailScreen extends GetView<DetailController> {
                   ),
                 const SizedBox(height: 8),
 
-                // Opening Hours
-                // Opening Hours
-                // Opening Hours
                 // Opening Hours
                 if (details.openingHours != null &&
                     details.openingHours?.weekdayText != null &&
