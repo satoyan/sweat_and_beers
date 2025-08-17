@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sweat_and_beers/core/utils/google_maps_utils.dart';
 import 'package:sweat_and_beers/features/detail/presentation/controllers/detail_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sweat_and_beers/core/constants/app_spacing.dart';
 
@@ -54,7 +54,7 @@ class DetailScreen extends GetView<DetailController> {
                             final photoReference =
                                 details.photos[index].photoReference;
                             return Image.network(
-                              'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=${dotenv.env['GOOGLE_PLACES_API_KEY']}',
+                              buildGoogleMapsPhotoUrl(photoReference),
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) =>
                                   const Icon(Icons.broken_image),

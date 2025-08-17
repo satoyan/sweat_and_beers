@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sweat_and_beers/core/utils/google_maps_utils.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:sweat_and_beers/core/constants/app_spacing.dart';
@@ -117,16 +117,12 @@ class SearchResultCard extends StatelessWidget {
     );
   }
 
-  String buildImageUrl(String photoUrl) {
-    return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoUrl&key=${dotenv.env['GOOGLE_PLACES_API_KEY']}';
-  }
-
   Widget _buildPlaceImage(BuildContext context, String? photoUrl) {
     if (photoUrl != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(s8),
         child: Image.network(
-          buildImageUrl(photoUrl),
+          buildGoogleMapsPhotoUrl(photoUrl),
           fit: BoxFit.cover,
           height: s152,
           width: double.infinity,

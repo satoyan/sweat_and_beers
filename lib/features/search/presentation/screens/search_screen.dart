@@ -16,7 +16,7 @@ class SearchScreen extends GetView<SearchController> {
       appBar: AppBar(
         title: Text(l10n.appTitle),
         actions: [
-          if (kDebugMode)
+          if (kDebugMode) ...[
             Obx(
               () => Switch(
                 value: controller.themeMode == ThemeMode.dark,
@@ -25,19 +25,22 @@ class SearchScreen extends GetView<SearchController> {
                 },
               ),
             ),
-          IconButton(
-            icon: const Icon(Icons.login),
-            onPressed: () {
-              Get.toNamed(AppRoutes.signIn);
-            },
-          ),
+            // IconButton(
+            //   icon: const Icon(Icons.login),
+            //   onPressed: () {
+            //     Get.toNamed(AppRoutes.signIn);
+            //   },
+            // ),
+          ],
         ],
       ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Obx(() => Text(l10n.searchRadius(controller.radius.round()))),
+            child: Obx(
+              () => Text(l10n.searchRadius(controller.radius.round())),
+            ),
           ),
           Obx(
             () => Slider(
@@ -50,26 +53,28 @@ class SearchScreen extends GetView<SearchController> {
                 controller.onRadiusChanged(value);
               },
               onChangeEnd: (value) {
-                controller.onInit(); // Re-fetch results when slider stops moving
+                controller
+                    .onInit(); // Re-fetch results when slider stops moving
               },
             ),
           ),
           Expanded(
             child: controller.obx(
-              (state) { // 'state' here is the List<SearchResult>
+              (state) {
                 return ListView.builder(
                   itemCount: state!.length,
                   itemBuilder: (context, index) {
                     final place = state[index];
                     return SearchResultCard(
                       place: place,
-                      onTap: () => Get.toNamed(AppRoutes.detail, arguments: place),
+                      onTap: () =>
+                          Get.toNamed(AppRoutes.detail, arguments: place),
                     );
                   },
                 );
               },
               onLoading: const Center(child: CircularProgressIndicator()),
-              onError: (error) => Center(child: Text(l10n.error(error!))), 
+              onError: (error) => Center(child: Text(l10n.error(error!))),
               onEmpty: Center(child: Text(l10n.pressToSearch)),
             ),
           ),
@@ -82,3 +87,4 @@ class SearchScreen extends GetView<SearchController> {
     );
   }
 }
+
