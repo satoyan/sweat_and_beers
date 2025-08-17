@@ -190,6 +190,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Distance: {distance} km'**
   String distanceKilometers(Object distance);
+
+  /// No description provided for @addressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get addressLabel;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phoneLabel;
+
+  /// No description provided for @ratingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get ratingLabel;
+
+  /// No description provided for @websiteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get websiteLabel;
+
+  /// No description provided for @openingHoursLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening Hours'**
+  String get openingHoursLabel;
+
+  /// No description provided for @reviewsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviewsLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -63,4 +63,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String distanceKilometers(Object distance) {
     return 'Distance: $distance km';
   }
+
+  @override
+  String get addressLabel => 'Address';
+
+  @override
+  String get phoneLabel => 'Phone';
+
+  @override
+  String get ratingLabel => 'Rating';
+
+  @override
+  String get websiteLabel => 'Website';
+
+  @override
+  String get openingHoursLabel => 'Opening Hours';
+
+  @override
+  String get reviewsLabel => 'Reviews';
 }

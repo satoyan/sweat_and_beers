@@ -15,5 +15,11 @@
     "shopStatusOpen": "営業中",
     "shopStatusClosed": "閉店",
     "distanceMeters": "距離: {distance} m",
-    "distanceKilometers": "距離: {distance} km"
+    "distanceKilometers": "距離: {distance} km",
+    "addressLabel": "住所",
+    "phoneLabel": "電話番号",
+    "ratingLabel": "評価",
+    "websiteLabel": "ウェブサイト",
+    "openingHoursLabel": "営業時間",
+    "reviewsLabel": "レビュー"
 }

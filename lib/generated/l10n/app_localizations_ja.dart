@@ -63,4 +63,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String distanceKilometers(Object distance) {
     return '距離: $distance km';
   }
+
+  @override
+  String get addressLabel => '住所';
+
+  @override
+  String get phoneLabel => '電話番号';
+
+  @override
+  String get ratingLabel => '評価';
+
+  @override
+  String get websiteLabel => 'ウェブサイト';
+
+  @override
+  String get openingHoursLabel => '営業時間';
+
+  @override
+  String get reviewsLabel => 'レビュー';
 }

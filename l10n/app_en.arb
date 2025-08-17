@@ -15,5 +15,11 @@
     "shopStatusOpen": "Open Now",
     "shopStatusClosed": "Closed",
     "distanceMeters": "Distance: {distance} m",
-    "distanceKilometers": "Distance: {distance} km"
+    "distanceKilometers": "Distance: {distance} km",
+    "addressLabel": "Address",
+    "phoneLabel": "Phone",
+    "ratingLabel": "Rating",
+    "websiteLabel": "Website",
+    "openingHoursLabel": "Opening Hours",
+    "reviewsLabel": "Reviews"
 }
