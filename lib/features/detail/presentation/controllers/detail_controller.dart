@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,7 +9,7 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
   final GetPlaceDetailsUseCase _getPlaceDetailsUseCase;
 
   DetailController({required GetPlaceDetailsUseCase getPlaceDetailsUseCase})
-      : _getPlaceDetailsUseCase = getPlaceDetailsUseCase;
+    : _getPlaceDetailsUseCase = getPlaceDetailsUseCase;
 
   final _place = Rx<SearchResult?>(null);
   SearchResult? get place => _place.value;
@@ -22,7 +21,10 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     if (_place.value != null && _place.value!.placeId != null) {
       _fetchPlaceDetails(_place.value!.placeId!);
     } else {
-      change(null, status: RxStatus.error('No place selected or place ID missing'));
+      change(
+        null,
+        status: RxStatus.error('No place selected or place ID missing'),
+      );
     }
   }
 
@@ -37,10 +39,11 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     }
   }
 
-  Future<void> launchMap() async {
-    final address = state?.formattedAddress ?? place?.address ?? '';
-    if (address.isNotEmpty) {
-      final query = Uri.encodeComponent(address);
+  Future<void> launchMap({String? address}) async {
+    final mapAddress =
+        address ?? state?.formattedAddress ?? place?.address ?? '';
+    if (mapAddress.isNotEmpty) {
+      final query = Uri.encodeComponent(mapAddress);
       final url = 'https://www.google.com/maps/search/?api=1&query=$query';
       final uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
@@ -49,6 +52,16 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
         logger.e('Could not launch map', error: 'Could not launch map');
         Get.snackbar('Error', 'Could not launch map');
       }
+    }
+  }
+
+  Future<void> launchPhone(String phoneNumber) async {
+    final Uri uri = Uri(scheme: "tel", path: phoneNumber);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      logger.e('Could not launch phone', error: 'Could not launch phone');
+      Get.snackbar('Error', 'Could not launch phone');
     }
   }
 }

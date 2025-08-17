@@ -48,17 +48,33 @@ class DetailScreen extends GetView<DetailController> {
 
                 // Address
                 if (details.formattedAddress != null)
-                  Text(
-                    '${l10n.addressLabel}: ${details.formattedAddress}',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${l10n.addressLabel}: ${details.formattedAddress}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.map),
+                        onPressed: () => controller.launchMap(address: details.formattedAddress),
+                      ),
+                    ],
                   ),
                 const SizedBox(height: 8),
 
                 // Phone Number
                 if (details.formattedPhoneNumber != null)
-                  Text(
-                    '${l10n.phoneLabel}: ${details.formattedPhoneNumber}',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  InkWell(
+                    onTap: () => controller.launchPhone(details.formattedPhoneNumber!),
+                    child: Text(
+                      '${l10n.phoneLabel}: ${details.formattedPhoneNumber}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                            decoration: TextDecoration.underline,
+                          ),
+                    ),
                   ),
                 const SizedBox(height: 8),
 
