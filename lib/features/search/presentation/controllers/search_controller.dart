@@ -7,7 +7,7 @@ import 'package:sweat_and_beers/features/search/domain/usecases/search_places_us
 import 'package:sweat_and_beers/core/utils/logger.dart';
 import 'package:flutter/material.dart';
 
-class SearchController extends GetxController {
+class SearchController extends GetxController with StateMixin<List<SearchResult>> {
   final LocationRepository _locationRepository;
   final SearchPlacesUseCase _searchPlacesUseCase;
 
@@ -18,16 +18,8 @@ class SearchController extends GetxController {
        _searchPlacesUseCase = searchPlacesUseCase;
 
   final Rx<Position?> _currentPosition = Rx<Position?>(null);
+
   Position? get currentPosition => _currentPosition.value;
-
-  final _isLoading = false.obs;
-  bool get isLoading => _isLoading.value;
-
-  final _error = ''.obs;
-  String get error => _error.value;
-
-  final _places = <SearchResult>[].obs;
-  List<SearchResult> get places => _places;
 
   final _radius = 500.0.obs;
   double get radius => _radius.value;
@@ -51,12 +43,13 @@ class SearchController extends GetxController {
   }
 
   Future<void> _fetchLocationAndSearch() async {
-    _isLoading.value = true;
-    _error.value = '';
+    change(null, status: RxStatus.loading());
     try {
       _currentPosition.value = await _locationRepository.getCurrentLocation();
       if (_currentPosition.value != null) {
         await _searchPlaces();
+      } else {
+        change([], status: RxStatus.empty());
       }
     } catch (e, s) {
       logger.e(
@@ -64,14 +57,13 @@ class SearchController extends GetxController {
         error: e,
         stackTrace: s,
       );
-      _error.value = e.toString();
-    } finally {
-      _isLoading.value = false;
+      change(null, status: RxStatus.error(e.toString()));
     }
   }
 
   Future<void> _searchPlaces() async {
     if (currentPosition == null) {
+      change([], status: RxStatus.empty());
       return;
     }
 
@@ -92,10 +84,14 @@ class SearchController extends GetxController {
           );
         }
       }
-      _places.value = results;
+      if (results.isEmpty) {
+        change([], status: RxStatus.empty());
+      } else {
+        change(results, status: RxStatus.success());
+      }
     } catch (e, s) {
       logger.e('Error searching places', error: e, stackTrace: s);
-      _error.value = e.toString();
+      change(null, status: RxStatus.error(e.toString()));
     }
   }
 }
