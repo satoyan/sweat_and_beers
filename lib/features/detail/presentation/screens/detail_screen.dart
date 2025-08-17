@@ -18,7 +18,7 @@ class DetailScreen extends GetView<DetailController> {
         actions: [
           IconButton(
             icon: Icon(
-              Icons.map,
+              Icons.location_pin,
               color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => controller.launchMap(),
@@ -60,9 +60,10 @@ class DetailScreen extends GetView<DetailController> {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-                      IconButton(
+                      TextButton.icon(
+                        label: Text(l10n.map),
                         icon: Icon(
-                          Icons.map,
+                          Icons.location_pin,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                         onPressed: () => controller.launchMap(

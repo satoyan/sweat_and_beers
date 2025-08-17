@@ -226,6 +226,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reviews'**
   String get reviewsLabel;
+
+  /// No description provided for @map.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get map;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

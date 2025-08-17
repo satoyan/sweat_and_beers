@@ -21,5 +21,6 @@
     "ratingLabel": "評価",
     "websiteLabel": "ウェブサイト",
     "openingHoursLabel": "営業時間",
-    "reviewsLabel": "レビュー"
+    "reviewsLabel": "レビュー",
+    "map": "地図"
 }

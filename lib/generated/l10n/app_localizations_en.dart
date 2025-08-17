@@ -81,4 +81,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewsLabel => 'Reviews';
+
+  @override
+  String get map => 'Map';
 }

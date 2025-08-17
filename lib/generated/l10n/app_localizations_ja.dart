@@ -81,4 +81,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get reviewsLabel => 'レビュー';
+
+  @override
+  String get map => '地図';
 }

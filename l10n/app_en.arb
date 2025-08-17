@@ -21,5 +21,6 @@
     "ratingLabel": "Rating",
     "websiteLabel": "Website",
     "openingHoursLabel": "Opening Hours",
-    "reviewsLabel": "Reviews"
+    "reviewsLabel": "Reviews",
+    "map": "Map"
 }
