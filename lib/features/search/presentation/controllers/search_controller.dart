@@ -49,7 +49,11 @@ class SearchController extends GetxController {
         await _searchPlaces();
       }
     } catch (e, s) {
-      logger.e('Error fetching location or searching places', error: e, stackTrace: s);
+      logger.e(
+        'Error fetching location or searching places',
+        error: e,
+        stackTrace: s,
+      );
       _error.value = e.toString();
     } finally {
       _isLoading.value = false;
@@ -57,15 +61,27 @@ class SearchController extends GetxController {
   }
 
   Future<void> _searchPlaces() async {
-    if (currentPosition == null) return;
+    if (currentPosition == null) {
+      return;
+    }
 
-    final query = 'beers'; // The use case will handle location and radius
+    final query = 'ビール';
     try {
       final results = await _searchPlacesUseCase.call(
         query,
-        location: currentPosition,
+        location: currentPosition!,
         radius: radius.toInt(),
       );
+      for (var result in results) {
+        if (result.latitude != null && result.longitude != null) {
+          result.distance = Geolocator.distanceBetween(
+            currentPosition!.latitude,
+            currentPosition!.longitude,
+            result.latitude!,
+            result.longitude!,
+          );
+        }
+      }
       _places.value = results;
     } catch (e, s) {
       logger.e('Error searching places', error: e, stackTrace: s);

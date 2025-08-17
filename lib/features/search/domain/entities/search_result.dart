@@ -1,3 +1,5 @@
+import 'package:google_maps_webservice/places.dart';
+
 class SearchResult {
   final String title;
   final String? address;
@@ -8,6 +10,7 @@ class SearchResult {
   final double? longitude;
   final String link;
   final String snippet;
+  double? distance;
 
   SearchResult({
     required this.title,
@@ -19,6 +22,7 @@ class SearchResult {
     this.longitude,
     required this.link,
     required this.snippet,
+    this.distance,
   });
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
@@ -28,10 +32,10 @@ class SearchResult {
       phoneNumber: json['international_phone_number'] as String?,
       rating: (json['rating'] as num?)?.toDouble(),
       photoUrl: json['photos'] != null && (json['photos'] as List).isNotEmpty
-          ? (json['photos'][0]['photo_reference'] as String)
+          ? (json['photos'][0] as Photo).photoReference
           : null,
-      latitude: json['geometry']?['location']?['lat'] as double?,
-      longitude: json['geometry']?['location']?['lng'] as double?,
+      latitude: (json['geometry'] as Geometry).location.lat,
+      longitude: (json['geometry'] as Geometry).location.lng,
       link: json['url'] as String? ?? '',
       snippet: json['vicinity'] as String? ?? '',
     );

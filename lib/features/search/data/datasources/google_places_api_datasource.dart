@@ -6,26 +6,34 @@ class GooglePlacesApiDataSource {
   final GoogleMapsPlaces _places;
 
   GooglePlacesApiDataSource({required String? apiKey})
-      : _places = GoogleMapsPlaces(apiKey: apiKey);
+    : _places = GoogleMapsPlaces(apiKey: apiKey);
 
-  Future<List<SearchResult>> search(String query, {double? latitude, double? longitude, int? radius}) async {
+  Future<List<SearchResult>> search(
+    String query, {
+    double? latitude,
+    double? longitude,
+    required int radius,
+  }) async {
     PlacesSearchResponse response;
     try {
-      if (latitude != null && longitude != null) {
-        response = await _places.searchNearbyWithRadius(
-          Location(lat: latitude, lng: longitude),
-          radius ?? 500, // Default radius if not provided
-          keyword: query,
-          type: 'restaurant', // You can refine this type based on your needs
-        );
-      } else {
-        response = await _places.searchByText(query);
-      }
+      if (latitude == null || longitude == null) {}
+      response = await _places.searchNearbyWithRadius(
+        Location(lat: latitude!, lng: longitude!),
+        radius,
+        keyword: query,
+        type: 'restaurant', // You can refine this type based on your needs
+        language: 'ja',
+      );
 
       if (response.status == 'OK') {
-        return response.results.map((result) => SearchResult.fromJson(result.toJson())).toList();
+        return response.results
+            .map((result) => SearchResult.fromJson(result.toJson()))
+            .toList();
       } else {
-        logger.e('Google Places API Error: ${response.errorMessage}');
+        logger.e(
+          'Google Places API Error: ${response.errorMessage}',
+          error: response.status,
+        );
         throw Exception(response.errorMessage ?? 'Failed to load places');
       }
     } catch (e, s) {

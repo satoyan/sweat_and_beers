@@ -11,9 +11,19 @@ class PlaceRepositoryImpl implements PlaceRepository {
   }) : _googlePlacesApiDataSource = googlePlacesApiDataSource;
 
   @override
-  Future<List<SearchResult>> searchPlaces(String query) async {
+  Future<List<SearchResult>> searchPlaces(
+    String query, {
+    required double latitude,
+    required double longitude,
+    required int radius,
+  }) async {
     try {
-      final results = await _googlePlacesApiDataSource.search(query);
+      final results = await _googlePlacesApiDataSource.search(
+        query,
+        latitude: latitude,
+        longitude: longitude,
+        radius: radius,
+      );
       return results;
     } catch (e, s) {
       logger.e('Error in PlaceRepositoryImpl', error: e, stackTrace: s);

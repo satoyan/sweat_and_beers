@@ -7,6 +7,6 @@ final logger = Logger(
     lineLength: 120, // width of the output
     colors: true, // Colorful log messages
     printEmojis: true, // Print emoji for each log message
-    printTime: false, // Should each log print a timestamp
+    dateTimeFormat: DateTimeFormat.none, // Should each log print a timestamp
   ),
 );

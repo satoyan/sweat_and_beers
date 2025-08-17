@@ -7,7 +7,16 @@ class SearchPlacesUseCase {
 
   SearchPlacesUseCase(this._placeRepository);
 
-  Future<List<SearchResult>> call(String query, {Position? location, int? radius}) async {
-    return await _placeRepository.searchPlaces(query);
+  Future<List<SearchResult>> call(
+    String query, {
+    required Position location,
+    required int radius,
+  }) async {
+    return await _placeRepository.searchPlaces(
+      query,
+      latitude: location.latitude,
+      longitude: location.longitude,
+      radius: radius,
+    );
   }
 }
