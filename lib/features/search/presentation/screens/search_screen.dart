@@ -5,6 +5,7 @@ import 'package:sweat_and_beers/app_routes.dart';
 import 'package:sweat_and_beers/features/search/presentation/controllers/search_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:sweat_and_beers/features/search/presentation/widgets/search_result_card.dart';
+import 'package:flutter/foundation.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -18,6 +19,15 @@ class SearchScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(l10n.appTitle),
             actions: [
+              if (kDebugMode)
+                Obx(
+                  () => Switch(
+                    value: controller.themeMode == ThemeMode.dark,
+                    onChanged: (value) {
+                      controller.toggleThemeMode();
+                    },
+                  ),
+                ),
               IconButton(
                 icon: const Icon(Icons.login),
                 onPressed: () {

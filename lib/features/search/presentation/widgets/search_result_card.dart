@@ -13,9 +13,6 @@ class SearchResultCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12.0),
@@ -25,16 +22,13 @@ class SearchResultCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image
-              _buildPlaceImage(place.photoUrl),
+              _buildPlaceImage(context, place.photoUrl),
               const SizedBox(height: 12.0),
 
               // Title
               Text(
                 place.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headlineSmall,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -46,7 +40,7 @@ class SearchResultCard extends StatelessWidget {
                   children: [
                     Icon(
                       place.isOpen! ? Icons.check_circle : Icons.cancel,
-                      color: place.isOpen! ? Colors.green : Colors.red,
+                      color: place.isOpen! ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.error,
                       size: 16,
                     ),
                     const SizedBox(width: 4.0),
@@ -54,11 +48,9 @@ class SearchResultCard extends StatelessWidget {
                       place.isOpen!
                           ? l10n.shopStatusOpen
                           : l10n.shopStatusClosed,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: place.isOpen! ? Colors.green : Colors.red,
-                      ),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: place.isOpen! ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.error,
+                          ),
                     ),
                   ],
                 ),
@@ -68,7 +60,7 @@ class SearchResultCard extends StatelessWidget {
               if (place.address != null)
                 Text(
                   place.address!,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                  style: Theme.of(context).textTheme.bodyMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -82,7 +74,7 @@ class SearchResultCard extends StatelessWidget {
                       index < place.rating!.floor()
                           ? Icons.star
                           : Icons.star_border,
-                      color: Colors.amber,
+                      color: Theme.of(context).colorScheme.secondary,
                       size: 18,
                     );
                   }).toList(),
@@ -93,14 +85,14 @@ class SearchResultCard extends StatelessWidget {
               if (place.phoneNumber != null)
                 Text(
                   place.phoneNumber!,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               const SizedBox(height: 8.0),
 
               // Snippet/Summary
               Text(
                 place.snippet,
-                style: TextStyle(fontSize: 14, color: Colors.grey[800]),
+                style: Theme.of(context).textTheme.bodyLarge,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -114,7 +106,7 @@ class SearchResultCard extends StatelessWidget {
                       : l10n.distanceKilometers(
                           (place.distance! / 1000).toStringAsFixed(2),
                         ),
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
             ],
           ),
@@ -127,7 +119,7 @@ class SearchResultCard extends StatelessWidget {
     return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoUrl&key=${dotenv.env['GOOGLE_PLACES_API_KEY']}';
   }
 
-  Widget _buildPlaceImage(String? photoUrl) {
+  Widget _buildPlaceImage(BuildContext context, String? photoUrl) {
     if (photoUrl != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
@@ -139,8 +131,8 @@ class SearchResultCard extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) => Container(
             height: 150,
             width: double.infinity,
-            color: Colors.grey[300],
-            child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+            color: Theme.of(context).colorScheme.surface,
+            child: Icon(Icons.broken_image, size: 50, color: Theme.of(context).colorScheme.onSurface),
           ),
         ),
       );
@@ -148,12 +140,8 @@ class SearchResultCard extends StatelessWidget {
       return Container(
         height: 150,
         width: double.infinity,
-        color: Colors.grey[300],
-        child: const Icon(
-          Icons.image_not_supported,
-          size: 50,
-          color: Colors.grey,
-        ),
+        color: Theme.of(context).colorScheme.surface,
+        child: Icon(Icons.image_not_supported, size: 50, color: Theme.of(context).colorScheme.onSurface),
       );
     }
   }

@@ -5,6 +5,7 @@ import 'package:sweat_and_beers/features/search/domain/repositories/location_rep
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/features/search/domain/usecases/search_places_usecase.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
+import 'package:flutter/material.dart';
 
 class SearchController extends GetxController {
   final LocationRepository _locationRepository;
@@ -30,6 +31,14 @@ class SearchController extends GetxController {
 
   final _radius = 500.0.obs;
   double get radius => _radius.value;
+
+  final _themeMode = ThemeMode.system.obs;
+  ThemeMode get themeMode => _themeMode.value;
+
+  void toggleThemeMode() {
+    _themeMode.value = _themeMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    Get.changeThemeMode(_themeMode.value);
+  }
 
   @override
   void onInit() {
