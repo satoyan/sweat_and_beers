@@ -57,6 +57,17 @@ class SearchResultCard extends StatelessWidget {
                             : Theme.of(context).colorScheme.error,
                       ),
                     ),
+                    if (place.isOpen == false && place.nextOpeningTime != null)
+                      Padding(
+                        padding: const EdgeInsets.only(left: s8),
+                        child: Text(
+                          l10n.shopOpensAt(place.nextOpeningTime!),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                      ),
                   ],
                 ),
               const SizedBox(height: s8),

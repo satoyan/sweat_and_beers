@@ -22,5 +22,6 @@
     "websiteLabel": "Website",
     "openingHoursLabel": "Opening Hours",
     "reviewsLabel": "Reviews",
-    "map": "Map"
+    "map": "Map",
+    "shopOpensAt": "Opens at: {time}"
 }

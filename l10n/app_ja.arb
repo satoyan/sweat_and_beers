@@ -22,5 +22,6 @@
     "websiteLabel": "ウェブサイト",
     "openingHoursLabel": "営業時間",
     "reviewsLabel": "レビュー",
-    "map": "地図"
+    "map": "地図",
+    "shopOpensAt": "開店時間: {time}"
 }

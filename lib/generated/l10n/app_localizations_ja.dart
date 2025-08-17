@@ -84,4 +84,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get map => '地図';
+
+  @override
+  String shopOpensAt(Object time) {
+    return '開店時間: $time';
+  }
 }

@@ -232,6 +232,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Map'**
   String get map;
+
+  /// No description provided for @shopOpensAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens at: {time}'**
+  String shopOpensAt(Object time);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

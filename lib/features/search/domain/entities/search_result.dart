@@ -13,6 +13,7 @@ class SearchResult {
   double? distance;
   final bool? isOpen;
   final String? placeId; // New field for place ID
+  final String? nextOpeningTime; // New field for next opening time
 
   SearchResult({
     required this.title,
@@ -27,6 +28,7 @@ class SearchResult {
     this.distance,
     this.isOpen,
     this.placeId,
+    this.nextOpeningTime,
   });
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
