@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sweat_and_beers/app_routes.dart';
 import 'package:sweat_and_beers/features/search/presentation/controllers/search_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sweat_and_beers/features/search/presentation/widgets/search_result_card.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -58,27 +58,8 @@ class SearchScreen extends StatelessWidget {
                       itemCount: controller.places.length,
                       itemBuilder: (context, index) {
                         final place = controller.places[index];
-                        return ListTile(
-                          title: Text(place.title),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (place.address != null) Text(place.address!),
-                              if (place.phoneNumber != null) Text('Phone: ${place.phoneNumber}'),
-                              if (place.rating != null) Text('Rating: ${place.rating}'),
-                              Text(place.snippet),
-                              if (place.distance != null)
-                                Text(
-                                    'Distance: ${place.distance! < 1000 ? '${place.distance!.toStringAsFixed(0)} m' : '${(place.distance! / 1000).toStringAsFixed(2)} km'}'),
-                            ],
-                          ),
-                          leading: place.photoUrl != null
-                              ? Image.network(
-                                  'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=${place.photoUrl}&key=${dotenv.env['GOOGLE_PLACES_API_KEY']}',
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) => const Icon(Icons.broken_image),
-                                )
-                              : null,
+                        return SearchResultCard(
+                          place: place,
                           onTap: () => Get.toNamed(AppRoutes.detail, arguments: place),
                         );
                       },
