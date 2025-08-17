@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
-import 'package:sweat_and_beers/presentation/detail/detail_screen.dart';
-import 'package:sweat_and_beers/presentation/search/search_controller.dart';
-import 'package:sweat_and_beers/presentation/signin/signin_screen.dart';
+import 'package:sweat_and_beers/features/detail/presentation/screens/detail_screen.dart';
+import 'package:sweat_and_beers/features/search/presentation/controllers/search_controller.dart';
+import 'package:sweat_and_beers/features/auth/presentation/screens/signin_screen.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 
 class SearchScreen extends StatelessWidget {

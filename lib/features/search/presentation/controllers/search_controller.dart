@@ -1,19 +1,21 @@
 
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:sweat_and_beers/domain/service/location_service.dart';
-import 'package:sweat_and_beers/domain/service/place_service.dart';
-import 'package:sweat_and_beers/models/search_result.dart';
+import 'package:sweat_and_beers/features/search/domain/repositories/location_repository.dart';
+import 'package:sweat_and_beers/features/search/domain/repositories/place_repository.dart';
+import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
+import 'package:sweat_and_beers/features/search/data/datasources/location_datasource.dart';
+import 'package:sweat_and_beers/features/search/data/datasources/place_datasource.dart';
 
 class SearchController extends GetxController {
-  final LocationService _locationService;
-  final PlaceService _placeService;
+  final LocationRepository _locationService;
+  final PlaceRepository _placeService;
 
   SearchController({
-    LocationService? locationService,
-    PlaceService? placeService,
-  })  : _locationService = locationService ?? LocationService(),
-        _placeService = placeService ?? PlaceService();
+    LocationRepository? locationRepository,
+    PlaceRepository? placeRepository,
+  })  : _locationService = locationRepository ?? LocationDataSourceImpl(),
+        _placeService = placeRepository ?? PlaceDataSourceImpl();
 
   final Rx<Position?> _currentPosition = Rx<Position?>(null);
   Position? get currentPosition => _currentPosition.value;

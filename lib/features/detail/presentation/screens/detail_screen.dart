@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sweat_and_beers/presentation/detail/detail_controller.dart';
+import 'package:sweat_and_beers/features/detail/presentation/controllers/detail_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 
 class DetailScreen extends StatelessWidget {

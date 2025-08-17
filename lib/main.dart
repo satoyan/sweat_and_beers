@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sweat_and_beers/presentation/search/search_screen.dart';
+import 'package:sweat_and_beers/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 

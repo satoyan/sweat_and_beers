@@ -1,7 +1,8 @@
-
 import 'package:geolocator/geolocator.dart';
+import 'package:sweat_and_beers/features/search/domain/repositories/location_repository.dart';
 
-class LocationService {
+class LocationDataSourceImpl implements LocationRepository {
+  @override
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
