@@ -1,0 +1,15 @@
+{
+    "@@locale": "ja",
+    "appTitle": "スウェット＆ビアーズ",
+    "searchScreenTitle": "検索",
+    "searchRadius": "検索半径: {radius}m",
+    "pressToSearch": "検索ボタンを押して場所を探す",
+    "detailScreenTitle": "詳細",
+    "error": "エラー: {error}",
+    "noTitle": "タイトルなし",
+    "noPlaceSelected": "場所が選択されていません",
+    "couldNotLaunchMap": "地図アプリを起動できませんでした",
+    "signInScreenTitle": "サインイン",
+    "signInWithGoogle": "Googleでサインイン",
+    "signInWithFacebook": "Facebookでサインイン"
+}

@@ -1,0 +1,15 @@
+{
+    "@@locale": "en",
+    "appTitle": "Sweat and Beers",
+    "searchScreenTitle": "Search",
+    "searchRadius": "Search Radius: {radius}m",
+    "pressToSearch": "Press the search button to find places",
+    "detailScreenTitle": "Detail",
+    "error": "Error: {error}",
+    "noTitle": "No title",
+    "noPlaceSelected": "No place selected",
+    "couldNotLaunchMap": "Could not launch map app",
+    "signInScreenTitle": "Sign In",
+    "signInWithGoogle": "Sign In with Google",
+    "signInWithFacebook": "Sign In with Facebook"
+}
