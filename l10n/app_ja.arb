@@ -11,5 +11,9 @@
     "couldNotLaunchMap": "地図アプリを起動できませんでした",
     "signInScreenTitle": "サインイン",
     "signInWithGoogle": "Googleでサインイン",
-    "signInWithFacebook": "Facebookでサインイン"
+    "signInWithFacebook": "Facebookでサインイン",
+    "shopStatusOpen": "営業中",
+    "shopStatusClosed": "閉店",
+    "distanceMeters": "距離: {distance} m",
+    "distanceKilometers": "距離: {distance} km"
 }

@@ -11,5 +11,9 @@
     "couldNotLaunchMap": "Could not launch map app",
     "signInScreenTitle": "Sign In",
     "signInWithGoogle": "Sign In with Google",
-    "signInWithFacebook": "Sign In with Facebook"
+    "signInWithFacebook": "Sign In with Facebook",
+    "shopStatusOpen": "Open Now",
+    "shopStatusClosed": "Closed",
+    "distanceMeters": "Distance: {distance} m",
+    "distanceKilometers": "Distance: {distance} km"
 }

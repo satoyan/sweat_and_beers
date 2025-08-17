@@ -47,4 +47,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signInWithFacebook => 'Sign In with Facebook';
+
+  @override
+  String get shopStatusOpen => 'Open Now';
+
+  @override
+  String get shopStatusClosed => 'Closed';
+
+  @override
+  String distanceMeters(Object distance) {
+    return 'Distance: $distance m';
+  }
+
+  @override
+  String distanceKilometers(Object distance) {
+    return 'Distance: $distance km';
+  }
 }

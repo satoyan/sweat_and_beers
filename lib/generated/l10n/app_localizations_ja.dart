@@ -47,4 +47,20 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get signInWithFacebook => 'Facebookでサインイン';
+
+  @override
+  String get shopStatusOpen => '営業中';
+
+  @override
+  String get shopStatusClosed => '閉店';
+
+  @override
+  String distanceMeters(Object distance) {
+    return '距離: $distance m';
+  }
+
+  @override
+  String distanceKilometers(Object distance) {
+    return '距離: $distance km';
+  }
 }

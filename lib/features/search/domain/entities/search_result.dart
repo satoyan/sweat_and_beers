@@ -11,6 +11,7 @@ class SearchResult {
   final String link;
   final String snippet;
   double? distance;
+  final bool? isOpen; // New field for open/closed status
 
   SearchResult({
     required this.title,
@@ -23,6 +24,7 @@ class SearchResult {
     required this.link,
     required this.snippet,
     this.distance,
+    this.isOpen,
   });
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
@@ -38,6 +40,7 @@ class SearchResult {
       longitude: (json['geometry'] as Geometry).location.lng,
       link: json['url'] as String? ?? '',
       snippet: json['vicinity'] as String? ?? '',
+      isOpen: (json['opening_hours'] as OpeningHoursDetail?)?.openNow,
     );
   }
 }

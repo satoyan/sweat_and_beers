@@ -166,6 +166,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign In with Facebook'**
   String get signInWithFacebook;
+
+  /// No description provided for @shopStatusOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Now'**
+  String get shopStatusOpen;
+
+  /// No description provided for @shopStatusClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get shopStatusClosed;
+
+  /// No description provided for @distanceMeters.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance: {distance} m'**
+  String distanceMeters(Object distance);
+
+  /// No description provided for @distanceKilometers.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance: {distance} km'**
+  String distanceKilometers(Object distance);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
