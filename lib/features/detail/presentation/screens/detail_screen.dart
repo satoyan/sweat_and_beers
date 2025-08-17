@@ -42,11 +42,51 @@ class DetailScreen extends GetView<DetailController> {
 
                 // Photo
                 if (details.photos.isNotEmpty)
-                  Image.network(
-                    'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${details.photos[0].photoReference}&key=${dotenv.env['GOOGLE_PLACES_API_KEY']}',
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const Icon(Icons.broken_image),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: s200, // Fixed height for the PageView
+                        child: PageView.builder(
+                          controller: controller.pageController,
+                          itemCount: details.photos.length,
+                          onPageChanged: controller.onPageChanged,
+                          itemBuilder: (context, index) {
+                            final photoReference =
+                                details.photos[index].photoReference;
+                            return Image.network(
+                              'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=${dotenv.env['GOOGLE_PLACES_API_KEY']}',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(Icons.broken_image),
+                            );
+                          },
+                        ),
+                      ),
+                      Obx(
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(details.photos.length, (
+                            index,
+                          ) {
+                            return Container(
+                              width: s8,
+                              height: s8,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: s4,
+                                vertical: s16,
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: controller.currentPage == index
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.onSurface
+                                          .withAlpha((255 * 0.5).round()),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ],
                   ),
                 const SizedBox(height: s16),
 

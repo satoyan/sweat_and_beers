@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,10 +15,17 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
   final _place = Rx<SearchResult?>(null);
   SearchResult? get place => _place.value;
 
+  final _currentPage = 0.obs;
+  int get currentPage => _currentPage.value;
+
+  late PageController _pageController;
+  PageController get pageController => _pageController;
+
   @override
   void onInit() {
     super.onInit();
     _place.value = Get.arguments as SearchResult?;
+    _pageController = PageController();
     if (_place.value != null && _place.value!.placeId != null) {
       _fetchPlaceDetails(_place.value!.placeId!);
     } else {
@@ -26,6 +34,16 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
         status: RxStatus.error('No place selected or place ID missing'),
       );
     }
+  }
+
+  @override
+  void onClose() {
+    _pageController.dispose();
+    super.onClose();
+  }
+
+  void onPageChanged(int index) {
+    _currentPage.value = index;
   }
 
   Future<void> _fetchPlaceDetails(String placeId) async {
