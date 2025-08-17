@@ -1,9 +1,8 @@
 
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
-import 'package:sweat_and_beers/features/detail/presentation/screens/detail_screen.dart';
+import 'package:sweat_and_beers/app_routes.dart';
 import 'package:sweat_and_beers/features/search/presentation/controllers/search_controller.dart';
-import 'package:sweat_and_beers/features/auth/presentation/screens/signin_screen.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -13,7 +12,6 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return GetBuilder<SearchController>(
-      init: SearchController(),
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
@@ -22,7 +20,7 @@ class SearchScreen extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.login),
                 onPressed: () {
-                  Get.to(() => const SignInScreen());
+                  Get.toNamed(AppRoutes.signIn);
                 },
               ),
             ],
@@ -61,8 +59,15 @@ class SearchScreen extends StatelessWidget {
                         final place = controller.places[index];
                         return ListTile(
                           title: Text(place.title),
-                          subtitle: Text(place.snippet),
-                          onTap: () => Get.to(() => const DetailScreen(), arguments: place),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (place.address != null) Text(place.address!),
+                              if (place.rating != null) Text('Rating: ${place.rating}'),
+                              Text(place.snippet),
+                            ],
+                          ),
+                          onTap: () => Get.toNamed(AppRoutes.detail, arguments: place),
                         );
                       },
                     );

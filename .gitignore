@@ -47,3 +47,5 @@ app.*.map.json
 .GEMINI.md
 .gemini/
 commit_message.txt
+.env
+.local/

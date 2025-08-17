@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sweat_and_beers/features/search/presentation/screens/search_screen.dart';
+import 'package:sweat_and_beers/app_routes.dart';
+import 'package:sweat_and_beers/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sweat_and_beers/core/bindings/app_binding.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -18,7 +23,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const SearchScreen(),
+      initialRoute: AppRoutes.search,
+      getPages: AppPages.routes,
+      initialBinding: AppBinding(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -33,4 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:sweat_and_beers/core/utils/logger.dart';
 
 class DetailController extends GetxController {
   final _place = Rx<SearchResult?>(null);
@@ -22,6 +23,7 @@ class DetailController extends GetxController {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
       } else {
+        logger.e('Could not launch map', error: 'Could not launch map');
         Get.snackbar('Error', 'Could not launch map');
       }
     }
