@@ -6,14 +6,17 @@ import 'package:sweat_and_beers/features/search/domain/entities/search_result.da
 import 'package:sweat_and_beers/features/search/domain/usecases/search_places_usecase.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:sweat_and_beers/features/detail/domain/usecases/get_place_details_usecase.dart';
 
-class SearchController extends GetxController with StateMixin<List<SearchResult>> {
+class SearchController extends GetxController
+    with StateMixin<List<SearchResult>> {
   final LocationRepository _locationRepository;
   final SearchPlacesUseCase _searchPlacesUseCase;
 
   SearchController({
     required LocationRepository locationRepository,
     required SearchPlacesUseCase searchPlacesUseCase,
+    required GetPlaceDetailsUseCase getPlaceDetailsUseCase,
   }) : _locationRepository = locationRepository,
        _searchPlacesUseCase = searchPlacesUseCase;
 
@@ -28,7 +31,9 @@ class SearchController extends GetxController with StateMixin<List<SearchResult>
   ThemeMode get themeMode => _themeMode.value;
 
   void toggleThemeMode() {
-    _themeMode.value = _themeMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    _themeMode.value = _themeMode.value == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
     Get.changeThemeMode(_themeMode.value);
   }
 

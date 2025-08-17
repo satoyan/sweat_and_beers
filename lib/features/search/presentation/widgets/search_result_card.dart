@@ -36,40 +36,26 @@ class SearchResultCard extends StatelessWidget {
               const SizedBox(height: s8),
 
               // Open/Closed Status
-              if (place.isOpen != null)
-                Row(
-                  children: [
-                    Icon(
-                      place.isOpen! ? Icons.check_circle : Icons.cancel,
-                      color: place.isOpen!
+              Row(
+                children: [
+                  Icon(
+                    place.isOpen ? Icons.check_circle : Icons.cancel,
+                    color: place.isOpen
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.error,
+                    size: s16,
+                  ),
+                  const SizedBox(width: s4),
+                  Text(
+                    place.isOpen ? l10n.shopStatusOpen : l10n.shopStatusClosed,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: place.isOpen
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.error,
-                      size: s16,
                     ),
-                    const SizedBox(width: s4),
-                    Text(
-                      place.isOpen!
-                          ? l10n.shopStatusOpen
-                          : l10n.shopStatusClosed,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: place.isOpen!
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                    if (place.isOpen == false && place.nextOpeningTime != null)
-                      Padding(
-                        padding: const EdgeInsets.only(left: s8),
-                        child: Text(
-                          l10n.shopOpensAt(place.nextOpeningTime!),
-                          style: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
-                      ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
               const SizedBox(height: s8),
 
               // Address

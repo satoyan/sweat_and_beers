@@ -1,4 +1,5 @@
 import 'package:google_maps_webservice/places.dart';
+import 'package:sweat_and_beers/core/constants/app_constants.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
 
@@ -10,19 +11,18 @@ class GooglePlacesApiDataSource {
 
   Future<List<SearchResult>> search(
     String query, {
-    double? latitude,
-    double? longitude,
+    required double latitude,
+    required double longitude,
     required int radius,
   }) async {
     PlacesSearchResponse response;
     try {
-      if (latitude == null || longitude == null) {}
       response = await _places.searchNearbyWithRadius(
-        Location(lat: latitude!, lng: longitude!),
+        Location(lat: latitude, lng: longitude),
         radius,
         keyword: query,
-        type: 'restaurant', // You can refine this type based on your needs
-        language: 'ja',
+        type: AppConstants.placeTypes,
+        language: AppConstants.defaultLang,
       );
 
       if (response.status == 'OK') {

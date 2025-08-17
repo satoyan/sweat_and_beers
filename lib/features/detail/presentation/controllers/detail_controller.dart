@@ -32,6 +32,8 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     change(null, status: RxStatus.loading());
     try {
       final details = await _getPlaceDetailsUseCase.call(placeId);
+      logger.d(details.toJson());
+
       change(details, status: RxStatus.success());
     } catch (e, s) {
       logger.e('Error fetching place details', error: e, stackTrace: s);
