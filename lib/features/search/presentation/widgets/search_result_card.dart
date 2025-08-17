@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
+import 'package:sweat_and_beers/core/constants/app_spacing.dart';
 
 class SearchResultCard extends StatelessWidget {
   final SearchResult place;
@@ -15,15 +16,15 @@ class SearchResultCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(s12),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(s16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image
               _buildPlaceImage(context, place.photoUrl),
-              const SizedBox(height: 12.0),
+              const SizedBox(height: s12),
 
               // Title
               Text(
@@ -32,7 +33,7 @@ class SearchResultCard extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: s8),
 
               // Open/Closed Status
               if (place.isOpen != null)
@@ -40,21 +41,25 @@ class SearchResultCard extends StatelessWidget {
                   children: [
                     Icon(
                       place.isOpen! ? Icons.check_circle : Icons.cancel,
-                      color: place.isOpen! ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.error,
-                      size: 16,
+                      color: place.isOpen!
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.error,
+                      size: s16,
                     ),
-                    const SizedBox(width: 4.0),
+                    const SizedBox(width: s4),
                     Text(
                       place.isOpen!
                           ? l10n.shopStatusOpen
                           : l10n.shopStatusClosed,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: place.isOpen! ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.error,
-                          ),
+                        color: place.isOpen!
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.error,
+                      ),
                     ),
                   ],
                 ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: s8),
 
               // Address
               if (place.address != null)
@@ -64,7 +69,7 @@ class SearchResultCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-              const SizedBox(height: 4.0),
+              const SizedBox(height: s4),
 
               // Rating
               if (place.rating != null)
@@ -75,11 +80,11 @@ class SearchResultCard extends StatelessWidget {
                           ? Icons.star
                           : Icons.star_border,
                       color: Theme.of(context).colorScheme.secondary,
-                      size: 18,
+                      size: s16,
                     );
                   }).toList(),
                 ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: s8),
 
               // Phone Number
               if (place.phoneNumber != null)
@@ -87,7 +92,7 @@ class SearchResultCard extends StatelessWidget {
                   place.phoneNumber!,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: s8),
 
               // Snippet/Summary
               Text(
@@ -96,7 +101,7 @@ class SearchResultCard extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: s8),
 
               // Distance (Placeholder for now)
               if (place.distance != null)
@@ -122,28 +127,35 @@ class SearchResultCard extends StatelessWidget {
   Widget _buildPlaceImage(BuildContext context, String? photoUrl) {
     if (photoUrl != null) {
       return ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(s8),
         child: Image.network(
           buildImageUrl(photoUrl),
           fit: BoxFit.cover,
-          height: 150,
+          height: s152,
           width: double.infinity,
           errorBuilder: (context, error, stackTrace) => Container(
-            height: 150,
+            height: s152,
             width: double.infinity,
             color: Theme.of(context).colorScheme.surface,
-            child: Icon(Icons.broken_image, size: 50, color: Theme.of(context).colorScheme.onSurface),
+            child: Icon(
+              Icons.broken_image,
+              size: s52,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ),
         ),
       );
     } else {
       return Container(
-        height: 150,
+        height: s152,
         width: double.infinity,
         color: Theme.of(context).colorScheme.surface,
-        child: Icon(Icons.image_not_supported, size: 50, color: Theme.of(context).colorScheme.onSurface),
+        child: Icon(
+          Icons.image_not_supported,
+          size: s52,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
       );
     }
   }
 }
-

@@ -4,6 +4,7 @@ import 'package:sweat_and_beers/features/detail/presentation/controllers/detail_
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:sweat_and_beers/core/constants/app_spacing.dart';
 
 class DetailScreen extends GetView<DetailController> {
   const DetailScreen({super.key});
@@ -16,7 +17,10 @@ class DetailScreen extends GetView<DetailController> {
         title: Text(controller.place?.title ?? l10n.detailScreenTitle),
         actions: [
           IconButton(
-            icon: Icon(Icons.map, color: Theme.of(context).colorScheme.onSurface),
+            icon: Icon(
+              Icons.map,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
             onPressed: () => controller.launchMap(),
           ),
         ],
@@ -25,7 +29,7 @@ class DetailScreen extends GetView<DetailController> {
         (details) {
           // Display detailed information using 'details' object
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(s16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -34,7 +38,7 @@ class DetailScreen extends GetView<DetailController> {
                   details!.name,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: s16),
 
                 // Photo
                 if (details.photos.isNotEmpty)
@@ -44,7 +48,7 @@ class DetailScreen extends GetView<DetailController> {
                     errorBuilder: (context, error, stackTrace) =>
                         const Icon(Icons.broken_image),
                   ),
-                const SizedBox(height: 16),
+                const SizedBox(height: s16),
 
                 // Address
                 if (details.formattedAddress != null)
@@ -57,14 +61,17 @@ class DetailScreen extends GetView<DetailController> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.map, color: Theme.of(context).colorScheme.onSurface),
+                        icon: Icon(
+                          Icons.map,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                         onPressed: () => controller.launchMap(
                           address: details.formattedAddress,
                         ),
                       ),
                     ],
                   ),
-                const SizedBox(height: 8),
+                const SizedBox(height: s8),
 
                 // Phone Number
                 if (details.formattedPhoneNumber != null)
@@ -79,7 +86,7 @@ class DetailScreen extends GetView<DetailController> {
                       ),
                     ),
                   ),
-                const SizedBox(height: 8),
+                const SizedBox(height: s8),
 
                 // Rating
                 if (details.rating != null)
@@ -89,19 +96,19 @@ class DetailScreen extends GetView<DetailController> {
                         '${l10n.ratingLabel}: ${details.rating}',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: s4),
                       ...List.generate(5, (index) {
                         return Icon(
                           index < details.rating!.floor()
                               ? Icons.star
                               : Icons.star_border,
                           color: Theme.of(context).colorScheme.secondary,
-                          size: 18,
+                          size: s16,
                         );
                       }),
                     ],
                   ),
-                const SizedBox(height: 8),
+                const SizedBox(height: s8),
 
                 // Website
                 if (details.website != null)
@@ -122,7 +129,7 @@ class DetailScreen extends GetView<DetailController> {
                       ),
                     ),
                   ),
-                const SizedBox(height: 8),
+                const SizedBox(height: s8),
 
                 // Opening Hours
                 if (details.openingHours != null &&
@@ -135,7 +142,7 @@ class DetailScreen extends GetView<DetailController> {
                         l10n.openingHoursLabel,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      ...(details.openingHours?.weekdayText ?? []).map(
+                      ...details.openingHours!.weekdayText.map(
                         (text) => Text(
                           text,
                           style: Theme.of(context).textTheme.bodyMedium,
@@ -143,7 +150,7 @@ class DetailScreen extends GetView<DetailController> {
                       ),
                     ],
                   ),
-                const SizedBox(height: 16),
+                const SizedBox(height: s16),
 
                 // Reviews (if available)
                 if (details.reviews.isNotEmpty)
@@ -156,7 +163,7 @@ class DetailScreen extends GetView<DetailController> {
                       ),
                       ...details.reviews.map(
                         (review) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          padding: const EdgeInsets.symmetric(vertical: s4),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
