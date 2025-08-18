@@ -40,14 +40,14 @@ class SearchController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    _fetchLocationAndSearch();
+    fetchLocationAndSearch();
   }
 
   void onRadiusChanged(double value) {
     _radius.value = value;
   }
 
-  Future<void> _fetchLocationAndSearch() async {
+  Future<void> fetchLocationAndSearch() async {
     change(null, status: RxStatus.loading());
     try {
       _currentPosition.value = await _locationRepository.getCurrentLocation();

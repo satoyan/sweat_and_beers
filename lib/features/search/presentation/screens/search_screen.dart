@@ -18,8 +18,9 @@ class SearchScreen extends GetView<SearchController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () {
-              Get.toNamed(AppRoutes.settings);
+            onPressed: () async {
+              await Get.toNamed(AppRoutes.settings);
+              controller.fetchLocationAndSearch();
             },
           ),
           if (kDebugMode) ...[
@@ -60,7 +61,7 @@ class SearchScreen extends GetView<SearchController> {
               },
               onChangeEnd: (value) {
                 controller
-                    .onInit(); // Re-fetch results when slider stops moving
+                    .fetchLocationAndSearch(); // Re-fetch results when slider stops moving
               },
             ),
           ),
@@ -87,7 +88,7 @@ class SearchScreen extends GetView<SearchController> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.onInit(),
+        onPressed: () => controller.fetchLocationAndSearch(),
         child: const Icon(Icons.search),
       ),
     );
