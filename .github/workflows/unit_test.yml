@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Get Flutter version from .mise.local.toml
+        id: get_flutter_version
+        run: |
+          echo "flutter_version=$(grep 'flutter = ' .mise.local.toml | cut -d '"' -f 2)" >> $GITHUB_OUTPUT
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.get_flutter_version.outputs.flutter_version }}
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test

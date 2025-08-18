@@ -19,10 +19,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Get Flutter version from .mise.local.toml
+        id: get_flutter_version
+        run: |
+          echo "flutter_version=$(grep 'flutter = ' .mise.local.toml | cut -d '"' -f 2)" >> $GITHUB_OUTPUT
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x' # Or a specific version
+          flutter-version: ${{ steps.get_flutter_version.outputs.flutter_version }}
           channel: 'stable'
           cache: true
 
