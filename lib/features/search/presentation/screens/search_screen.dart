@@ -5,6 +5,8 @@ import 'package:sweat_and_beers/features/search/presentation/controllers/search_
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:sweat_and_beers/features/search/presentation/widgets/search_result_card.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sweat_and_beers/features/settings/presentation/screens/settings_screen.dart';
+import 'package:sweat_and_beers/features/settings/bindings/settings_binding.dart';
 
 class SearchScreen extends GetView<SearchController> {
   const SearchScreen({super.key});
@@ -19,9 +21,11 @@ class SearchScreen extends GetView<SearchController> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () async {
-              final result = await Get.toNamed(
-                AppRoutes.settings,
+              final result = await Get.to(
+                () => const SettingsScreen(),
+                binding: SettingsBinding(),
               );
+
               if (result == true) {
                 controller.fetchLocationAndSearch();
               }
@@ -70,7 +74,8 @@ class SearchScreen extends GetView<SearchController> {
             ),
           ),
           Expanded(
-            child: RefreshIndicator( // Wrap with RefreshIndicator
+            child: RefreshIndicator(
+              // Wrap with RefreshIndicator
               onRefresh: () async {
                 await controller.fetchLocationAndSearch();
               },

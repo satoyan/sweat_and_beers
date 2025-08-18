@@ -12,8 +12,7 @@ class SettingsController extends GetxController {
   final RxString _searchKeyword = 'クラフトビール'.obs; // Default to クラフトビール
   String get searchKeyword => _searchKeyword.value;
 
-  final RxBool _settingsChanged = false.obs;
-  bool get settingsChanged => _settingsChanged.value;
+  final RxBool settingsChanged = false.obs;
 
   @override
   void onInit() {
@@ -37,7 +36,7 @@ class SettingsController extends GetxController {
       await prefs.setString(_languageCodeKey, languageCode);
       _locale.value = Locale(languageCode);
       Get.updateLocale(_locale.value);
-      _settingsChanged.value = true;
+      settingsChanged.value = true;
     }
   }
 
@@ -54,7 +53,7 @@ class SettingsController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_searchKeywordKey, keyword);
       _searchKeyword.value = keyword;
-      _settingsChanged.value = true;
+      settingsChanged.value = true;
     }
   }
 }

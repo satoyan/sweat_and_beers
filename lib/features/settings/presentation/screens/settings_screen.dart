@@ -15,7 +15,10 @@ class SettingsScreen extends GetView<SettingsController> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.back(result: controller.settingsChanged ? true : null);
+            Get.back(result: controller.settingsChanged.value);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              controller.settingsChanged.value = false;
+            });
           },
         ),
       ),
@@ -34,14 +37,8 @@ class SettingsScreen extends GetView<SettingsController> {
                     }
                   },
                   items: const [
-                    DropdownMenuItem(
-                      value: 'en',
-                      child: Text('English'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'ja',
-                      child: Text('日本語'),
-                    ),
+                    DropdownMenuItem(value: 'en', child: Text('English')),
+                    DropdownMenuItem(value: 'ja', child: Text('日本語')),
                   ],
                 ),
               ),
@@ -57,10 +54,7 @@ class SettingsScreen extends GetView<SettingsController> {
                     }
                   },
                   items: [
-                    DropdownMenuItem(
-                      value: 'ビール',
-                      child: Text(l10n.beer),
-                    ),
+                    DropdownMenuItem(value: 'ビール', child: Text(l10n.beer)),
                     DropdownMenuItem(
                       value: 'クラフトビール',
                       child: Text(l10n.craftBeer),

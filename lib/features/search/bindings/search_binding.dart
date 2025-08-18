@@ -24,7 +24,9 @@ class SearchBinding extends Bindings {
       () => PlaceRepositoryImpl(googlePlacesApiDataSource: Get.find()),
     );
     Get.lazyPut<PlaceDetailsRepositoryImpl>(
-      () => PlaceDetailsRepositoryImpl(Get.find<GooglePlacesDetailsApiDataSource>()),
+      () => PlaceDetailsRepositoryImpl(
+        Get.find<GooglePlacesDetailsApiDataSource>(),
+      ),
     );
 
     // Use Cases
