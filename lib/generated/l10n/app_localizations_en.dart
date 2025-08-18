@@ -95,4 +95,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'Language';
+
+  @override
+  String get searchKeyword => 'Search Keyword';
+
+  @override
+  String get beer => 'Beer';
+
+  @override
+  String get craftBeer => 'Craft Beer';
 }

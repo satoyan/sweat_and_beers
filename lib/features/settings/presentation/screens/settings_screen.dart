@@ -40,6 +40,29 @@ class SettingsScreen extends GetView<SettingsController> {
                 ),
               ),
             ),
+            ListTile(
+              title: Text(l10n.searchKeyword),
+              trailing: Obx(
+                () => DropdownButton<String>(
+                  value: controller.searchKeyword,
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      controller.changeSearchKeyword(newValue);
+                    }
+                  },
+                  items: [
+                    DropdownMenuItem(
+                      value: 'ビール',
+                      child: Text(l10n.beer),
+                    ),
+                    DropdownMenuItem(
+                      value: 'クラフトビール',
+                      child: Text(l10n.craftBeer),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:sweat_and_beers/features/search/presentation/controllers/search_
 import 'package:sweat_and_beers/features/detail/data/datasources/google_places_details_api_datasource.dart';
 import 'package:sweat_and_beers/features/detail/data/repositories/place_details_repository_impl.dart';
 import 'package:sweat_and_beers/features/detail/domain/usecases/get_place_details_usecase.dart';
+import 'package:sweat_and_beers/features/settings/presentation/controllers/settings_controller.dart';
 
 class SearchBinding extends Bindings {
   @override
@@ -40,6 +41,7 @@ class SearchBinding extends Bindings {
         locationRepository: Get.find<LocationRepository>(),
         searchPlacesUseCase: Get.find<SearchPlacesUseCase>(),
         getPlaceDetailsUseCase: Get.find<GetPlaceDetailsUseCase>(),
+        settingsController: Get.find<SettingsController>(),
       ),
     );
   }

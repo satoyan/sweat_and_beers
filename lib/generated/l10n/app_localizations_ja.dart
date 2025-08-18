@@ -95,4 +95,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get language => '言語';
+
+  @override
+  String get searchKeyword => '検索キーワード';
+
+  @override
+  String get beer => 'ビール';
+
+  @override
+  String get craftBeer => 'クラフトビール';
 }

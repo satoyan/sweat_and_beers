@@ -25,5 +25,8 @@
     "map": "Map",
     "shopOpensAt": "Opens at: {time}",
     "settings": "Settings",
-    "language": "Language"
+    "language": "Language",
+    "searchKeyword": "Search Keyword",
+    "beer": "Beer",
+    "craftBeer": "Craft Beer"
 }

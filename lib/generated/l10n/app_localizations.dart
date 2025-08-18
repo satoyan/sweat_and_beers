@@ -250,6 +250,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
+
+  /// No description provided for @searchKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Keyword'**
+  String get searchKeyword;
+
+  /// No description provided for @beer.
+  ///
+  /// In en, this message translates to:
+  /// **'Beer'**
+  String get beer;
+
+  /// No description provided for @craftBeer.
+  ///
+  /// In en, this message translates to:
+  /// **'Craft Beer'**
+  String get craftBeer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

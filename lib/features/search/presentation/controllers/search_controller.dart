@@ -1,24 +1,27 @@
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:sweat_and_beers/core/constants/app_constants.dart';
 import 'package:sweat_and_beers/features/search/domain/repositories/location_repository.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/features/search/domain/usecases/search_places_usecase.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:sweat_and_beers/features/detail/domain/usecases/get_place_details_usecase.dart';
+import 'package:sweat_and_beers/features/settings/presentation/controllers/settings_controller.dart';
 
 class SearchController extends GetxController
     with StateMixin<List<SearchResult>> {
   final LocationRepository _locationRepository;
   final SearchPlacesUseCase _searchPlacesUseCase;
+  final SettingsController _settingsController;
 
   SearchController({
     required LocationRepository locationRepository,
     required SearchPlacesUseCase searchPlacesUseCase,
     required GetPlaceDetailsUseCase getPlaceDetailsUseCase,
+    required SettingsController settingsController,
   }) : _locationRepository = locationRepository,
-       _searchPlacesUseCase = searchPlacesUseCase;
+       _searchPlacesUseCase = searchPlacesUseCase,
+       _settingsController = settingsController;
 
   final Rx<Position?> _currentPosition = Rx<Position?>(null);
 
@@ -72,7 +75,7 @@ class SearchController extends GetxController
       return;
     }
 
-    final query = AppConstants.beerKeywordJa;
+    final query = _settingsController.searchKeyword;
     try {
       final results = await _searchPlacesUseCase.call(
         query,
