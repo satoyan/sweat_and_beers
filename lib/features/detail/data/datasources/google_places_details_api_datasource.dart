@@ -1,6 +1,6 @@
+import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:sweat_and_beers/core/constants/app_constants.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
 
 class GooglePlacesDetailsApiDataSource {
@@ -13,7 +13,7 @@ class GooglePlacesDetailsApiDataSource {
     try {
       final response = await _places.getDetailsByPlaceId(
         placeId,
-        language: AppConstants.defaultLang,
+        language: Get.locale?.languageCode ?? 'en',
       );
       if (response.status == 'OK') {
         return response.result;

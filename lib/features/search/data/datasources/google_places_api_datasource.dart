@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:sweat_and_beers/core/constants/app_constants.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
@@ -22,7 +23,7 @@ class GooglePlacesApiDataSource {
         radius,
         keyword: query,
         type: AppConstants.placeTypes,
-        language: AppConstants.defaultLang,
+        language: Get.locale?.languageCode ?? 'en',
       );
 
       if (response.status == 'OK') {

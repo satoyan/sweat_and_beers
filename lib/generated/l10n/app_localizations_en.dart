@@ -89,4 +89,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String shopOpensAt(Object time) {
     return 'Opens at: $time';
   }
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get language => 'Language';
 }

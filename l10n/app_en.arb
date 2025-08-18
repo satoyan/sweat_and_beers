@@ -23,5 +23,7 @@
     "openingHoursLabel": "Opening Hours",
     "reviewsLabel": "Reviews",
     "map": "Map",
-    "shopOpensAt": "Opens at: {time}"
+    "shopOpensAt": "Opens at: {time}",
+    "settings": "Settings",
+    "language": "Language"
 }

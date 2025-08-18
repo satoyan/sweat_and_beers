@@ -89,4 +89,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String shopOpensAt(Object time) {
     return '開店時間: $time';
   }
+
+  @override
+  String get settings => '設定';
+
+  @override
+  String get language => '言語';
 }

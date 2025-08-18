@@ -16,6 +16,12 @@ class SearchScreen extends GetView<SearchController> {
       appBar: AppBar(
         title: Text(l10n.appTitle),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Get.toNamed(AppRoutes.settings);
+            },
+          ),
           if (kDebugMode) ...[
             Obx(
               () => Switch(

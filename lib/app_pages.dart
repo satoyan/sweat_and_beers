@@ -5,6 +5,8 @@ import 'package:sweat_and_beers/features/detail/presentation/screens/detail_scre
 import 'package:sweat_and_beers/features/detail/bindings/detail_binding.dart';
 import 'package:sweat_and_beers/features/search/bindings/search_binding.dart';
 import 'package:sweat_and_beers/features/search/presentation/screens/search_screen.dart';
+import 'package:sweat_and_beers/features/settings/bindings/settings_binding.dart';
+import 'package:sweat_and_beers/features/settings/presentation/screens/settings_screen.dart';
 
 class AppPages {
   static final routes = [
@@ -15,5 +17,10 @@ class AppPages {
     ),
     GetPage(name: AppRoutes.detail, page: () => const DetailScreen(), binding: DetailBinding()),
     GetPage(name: AppRoutes.signIn, page: () => const SignInScreen()),
+    GetPage(
+      name: AppRoutes.settings,
+      page: () => const SettingsScreen(),
+      binding: SettingsBinding(),
+    ),
   ];
 }

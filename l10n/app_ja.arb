@@ -23,5 +23,7 @@
     "openingHoursLabel": "営業時間",
     "reviewsLabel": "レビュー",
     "map": "地図",
-    "shopOpensAt": "開店時間: {time}"
+    "shopOpensAt": "開店時間: {time}",
+    "settings": "設定",
+    "language": "言語"
 }
