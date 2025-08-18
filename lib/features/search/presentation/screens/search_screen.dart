@@ -70,23 +70,28 @@ class SearchScreen extends GetView<SearchController> {
             ),
           ),
           Expanded(
-            child: controller.obx(
-              (state) {
-                return ListView.builder(
-                  itemCount: state!.length,
-                  itemBuilder: (context, index) {
-                    final place = state[index];
-                    return SearchResultCard(
-                      place: place,
-                      onTap: () =>
-                          Get.toNamed(AppRoutes.detail, arguments: place),
-                    );
-                  },
-                );
+            child: RefreshIndicator( // Wrap with RefreshIndicator
+              onRefresh: () async {
+                await controller.fetchLocationAndSearch();
               },
-              onLoading: const Center(child: CircularProgressIndicator()),
-              onError: (error) => Center(child: Text(l10n.error(error!))),
-              onEmpty: Center(child: Text(l10n.pressToSearch)),
+              child: controller.obx(
+                (state) {
+                  return ListView.builder(
+                    itemCount: state!.length,
+                    itemBuilder: (context, index) {
+                      final place = state[index];
+                      return SearchResultCard(
+                        place: place,
+                        onTap: () =>
+                            Get.toNamed(AppRoutes.detail, arguments: place),
+                      );
+                    },
+                  );
+                },
+                onLoading: const Center(child: CircularProgressIndicator()),
+                onError: (error) => Center(child: Text(l10n.error(error!))),
+                onEmpty: Center(child: Text(l10n.pressToSearch)),
+              ),
             ),
           ),
         ],
