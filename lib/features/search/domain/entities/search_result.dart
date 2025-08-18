@@ -13,6 +13,7 @@ class SearchResult {
   double? distance;
   final String? placeId; // New field for place ID
   final OpeningHoursDetail? openingHours;
+  final bool? permanentlyClosed;
 
   SearchResult({
     required this.title,
@@ -27,6 +28,7 @@ class SearchResult {
     this.distance,
     this.placeId,
     this.openingHours,
+    this.permanentlyClosed,
   });
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
@@ -44,6 +46,7 @@ class SearchResult {
       snippet: json['vicinity'] as String? ?? '',
       openingHours: (json['opening_hours'] as OpeningHoursDetail?),
       placeId: json['place_id'] as String?,
+      permanentlyClosed: json['permanently_closed'] as bool?,
     );
   }
 

@@ -23,6 +23,18 @@ class SearchResultCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Permanently Closed Status (if applicable)
+              if (place.permanentlyClosed == true)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: s8),
+                  child: Text(
+                    l10n.permanentlyClosed,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               // Image
               _buildPlaceImage(context, place.photoUrl),
               const SizedBox(height: s12),
@@ -36,27 +48,30 @@ class SearchResultCard extends StatelessWidget {
               ),
               const SizedBox(height: s8),
 
-              // Open/Closed Status
-              Row(
-                children: [
-                  Icon(
-                    place.isOpen ? Icons.check_circle : Icons.cancel,
-                    color: place.isOpen
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.error,
-                    size: s16,
-                  ),
-                  const SizedBox(width: s4),
-                  Text(
-                    place.isOpen ? l10n.shopStatusOpen : l10n.shopStatusClosed,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              // Open/Closed Status (only if not permanently closed)
+              if (place.permanentlyClosed != true)
+                Row(
+                  children: [
+                    Icon(
+                      place.isOpen ? Icons.check_circle : Icons.cancel,
                       color: place.isOpen
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.error,
+                      size: s16,
                     ),
-                  ),
-                ],
-              ),
+                    const SizedBox(width: s4),
+                    Text(
+                      place.isOpen
+                          ? l10n.shopStatusOpen
+                          : l10n.shopStatusClosed,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: place.isOpen
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  ],
+                ),
               const SizedBox(height: s8),
 
               // Address

@@ -28,5 +28,6 @@
     "language": "言語",
     "searchKeyword": "検索キーワード",
     "beer": "ビール",
-    "craftBeer": "クラフトビール"
+    "craftBeer": "クラフトビール",
+    "permanentlyClosed": "永続的に閉鎖"
 }

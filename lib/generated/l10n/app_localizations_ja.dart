@@ -104,4 +104,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get craftBeer => 'クラフトビール';
+
+  @override
+  String get permanentlyClosed => '永続的に閉鎖';
 }

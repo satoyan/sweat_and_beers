@@ -104,4 +104,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get craftBeer => 'Craft Beer';
+
+  @override
+  String get permanentlyClosed => 'Permanently Closed';
 }

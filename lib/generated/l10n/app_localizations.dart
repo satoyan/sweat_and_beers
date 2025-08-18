@@ -268,6 +268,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Craft Beer'**
   String get craftBeer;
+
+  /// No description provided for @permanentlyClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Permanently Closed'**
+  String get permanentlyClosed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -28,5 +28,6 @@
     "language": "Language",
     "searchKeyword": "Search Keyword",
     "beer": "Beer",
-    "craftBeer": "Craft Beer"
+    "craftBeer": "Craft Beer",
+    "permanentlyClosed": "Permanently Closed"
 }
