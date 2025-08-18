@@ -19,8 +19,12 @@ class SearchScreen extends GetView<SearchController> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () async {
-              await Get.toNamed(AppRoutes.settings);
-              controller.fetchLocationAndSearch();
+              final result = await Get.toNamed(
+                AppRoutes.settings,
+              );
+              if (result == true) {
+                controller.fetchLocationAndSearch();
+              }
             },
           ),
           if (kDebugMode) ...[
@@ -94,4 +98,3 @@ class SearchScreen extends GetView<SearchController> {
     );
   }
 }
-

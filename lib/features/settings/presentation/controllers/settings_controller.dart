@@ -12,6 +12,9 @@ class SettingsController extends GetxController {
   final RxString _searchKeyword = 'クラフトビール'.obs; // Default to クラフトビール
   String get searchKeyword => _searchKeyword.value;
 
+  final RxBool _settingsChanged = false.obs;
+  bool get settingsChanged => _settingsChanged.value;
+
   @override
   void onInit() {
     super.onInit();
@@ -29,10 +32,13 @@ class SettingsController extends GetxController {
   }
 
   Future<void> changeLocale(String languageCode) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_languageCodeKey, languageCode);
-    _locale.value = Locale(languageCode);
-    Get.updateLocale(_locale.value);
+    if (_locale.value.languageCode != languageCode) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_languageCodeKey, languageCode);
+      _locale.value = Locale(languageCode);
+      Get.updateLocale(_locale.value);
+      _settingsChanged.value = true;
+    }
   }
 
   Future<void> _loadSearchKeyword() async {
@@ -44,8 +50,11 @@ class SettingsController extends GetxController {
   }
 
   Future<void> changeSearchKeyword(String keyword) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_searchKeywordKey, keyword);
-    _searchKeyword.value = keyword;
+    if (_searchKeyword.value != keyword) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_searchKeywordKey, keyword);
+      _searchKeyword.value = keyword;
+      _settingsChanged.value = true;
+    }
   }
 }

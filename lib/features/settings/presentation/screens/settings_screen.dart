@@ -12,6 +12,12 @@ class SettingsScreen extends GetView<SettingsController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.settings),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back(result: controller.settingsChanged ? true : null);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

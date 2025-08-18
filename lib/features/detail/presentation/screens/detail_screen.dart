@@ -5,6 +5,7 @@ import 'package:sweat_and_beers/features/detail/presentation/controllers/detail_
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sweat_and_beers/core/constants/app_spacing.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailScreen extends GetView<DetailController> {
   const DetailScreen({super.key});
@@ -53,10 +54,13 @@ class DetailScreen extends GetView<DetailController> {
                           itemBuilder: (context, index) {
                             final photoReference =
                                 details.photos[index].photoReference;
-                            return Image.network(
-                              buildGoogleMapsPhotoUrl(photoReference),
+                            return CachedNetworkImage(
+                              imageUrl: buildGoogleMapsPhotoUrl(photoReference),
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) =>
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) =>
                                   const Icon(Icons.broken_image),
                             );
                           },

@@ -3,6 +3,7 @@ import 'package:sweat_and_beers/core/utils/google_maps_utils.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:sweat_and_beers/core/constants/app_spacing.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SearchResultCard extends StatelessWidget {
   final SearchResult place;
@@ -121,12 +122,18 @@ class SearchResultCard extends StatelessWidget {
     if (photoUrl != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(s8),
-        child: Image.network(
-          buildGoogleMapsPhotoUrl(photoUrl),
+        child: CachedNetworkImage(
+          imageUrl: buildGoogleMapsPhotoUrl(photoUrl),
           fit: BoxFit.cover,
           height: s152,
           width: double.infinity,
-          errorBuilder: (context, error, stackTrace) => Container(
+          placeholder: (context, url) => Container(
+            height: s152,
+            width: double.infinity,
+            color: Theme.of(context).colorScheme.surface,
+            child: const Center(child: CircularProgressIndicator()),
+          ),
+          errorWidget: (context, url, error) => Container(
             height: s152,
             width: double.infinity,
             color: Theme.of(context).colorScheme.surface,
