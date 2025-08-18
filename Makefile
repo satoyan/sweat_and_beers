@@ -1,7 +1,14 @@
-.PHONY: all run build clean get analyze test lint format build_runner_watch build_runner_build l10n copy-db
+.PHONY: all run run-dev run-prod build clean get analyze test lint format build_runner_watch build_runner_build l10n copy-db
 
-run:
-	flutter run
+# Default run command, runs the dev flavor.
+# Use `make run-dev` or `make run-prod` to be explicit.
+run: run-dev
+
+run-dev:
+	flutter run --flavor dev
+
+run-prod:
+	flutter run --flavor prod
 
 build:
 	flutter build apk
