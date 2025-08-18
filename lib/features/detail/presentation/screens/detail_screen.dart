@@ -206,21 +206,71 @@ class DetailScreen extends GetView<DetailController> {
                         l10n.reviewsLabel,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
+                      const SizedBox(height: s8), // Add some space
                       ...details.reviews.map(
-                        (review) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: s4),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${review.authorName} (${review.rating}/5)',
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                              Text(
-                                review.text,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ],
+                        (review) => Card(
+                          // Wrap in Card
+                          margin: const EdgeInsets.symmetric(
+                            vertical: s4,
+                          ), // Add margin
+                          child: Padding(
+                            padding: const EdgeInsets.all(s12), // Add padding
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  // For author and stars
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      review.authorName,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium, // Slightly larger font
+                                    ),
+                                    Row(
+                                      // Star rating
+                                      children: List.generate(5, (index) {
+                                        return Icon(
+                                          index < (review.rating.floor())
+                                              ? Icons.star
+                                              : Icons.star_border,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
+                                          size: s16,
+                                        );
+                                      }),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: s8,
+                                ), // Space between header and text
+                                Text(
+                                  review.text,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                if (review.relativeTimeDescription
+                                    case final timeDescription) // Optional: display time
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: s4),
+                                    child: Text(
+                                      timeDescription,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface
+                                                .withAlpha((255 * 0.6).round()),
+                                          ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
