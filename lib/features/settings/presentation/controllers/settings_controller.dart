@@ -6,7 +6,7 @@ class SettingsController extends GetxController {
   static const String _languageCodeKey = 'language_code';
   static const String _searchKeywordKey = 'search_keyword';
 
-  final Rx<Locale> _locale = Get.locale!.obs;
+  final Rx<Locale> _locale = (Get.locale ?? const Locale('ja')).obs;
   Locale get locale => _locale.value;
 
   final RxString _searchKeyword = 'クラフトビール'.obs; // Default to クラフトビール
