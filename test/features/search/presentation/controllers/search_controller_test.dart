@@ -59,13 +59,11 @@ void main() {
       when(
         mockLocationRepository.getCurrentLocation(),
       ).thenAnswer((_) async => tPosition);
-      when(
-        mockSearchPlacesUseCase.call(
-          any,
-          location: anyNamed('location'),
-          radius: anyNamed('radius'),
-        ),
-      ).thenAnswer((_) async => tSearchResults);
+      when(mockSearchPlacesUseCase.call(
+        any,
+        location: anyNamed('location'),
+        radius: anyNamed('radius'),
+      )).thenAnswer((_) async => tSearchResults);
 
       // Act
       await searchController.fetchLocationAndSearch();
@@ -74,13 +72,11 @@ void main() {
       expect(searchController.currentPosition, tPosition);
       expect(searchController.state, tSearchResults);
       verify(mockLocationRepository.getCurrentLocation()).called(1);
-      verify(
-        mockSearchPlacesUseCase.call(
-          any,
-          location: anyNamed('location'),
-          radius: anyNamed('radius'),
-        ),
-      ).called(1);
+      verify(mockSearchPlacesUseCase.call(
+        any,
+        location: anyNamed('location'),
+        radius: anyNamed('radius'),
+      )).called(1);
       verifyNoMoreInteractions(mockLocationRepository);
       verifyNoMoreInteractions(mockSearchPlacesUseCase);
     });
