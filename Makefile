@@ -34,3 +34,7 @@ l10n:
 	flutter gen-l10n --arb-dir=l10n \
 		--output-localization-file=app_localizations.dart \
 		--output-dir=lib/generated/l10n
+
+distribute-dev:
+	flutter build apk --flavor dev
+	firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app $(FIREBASE_APP_ID_DEV) --groups "testers"
