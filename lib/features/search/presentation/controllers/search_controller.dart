@@ -77,6 +77,7 @@ class SearchController extends GetxController
 
     final query = _settingsController.searchKeyword;
     try {
+      logger.d('radius: $radius');
       final results = await _searchPlacesUseCase.call(
         query,
         location: currentPosition!,
