@@ -1,5 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <application
-        android:label="Sweat &amp; Beers (Dev)">
+        android:label="Sweat &amp; Beers (Dev)"
+        tools:replace="android:label">
     </application>
 </manifest>
