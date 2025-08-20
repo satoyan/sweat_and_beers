@@ -96,6 +96,7 @@ class SearchController extends GetxController
       if (results.isEmpty) {
         change([], status: RxStatus.empty());
       } else {
+        results.sort((a, b) => a.distance!.compareTo(b.distance!));
         change(results, status: RxStatus.success());
       }
     } catch (e, s) {
