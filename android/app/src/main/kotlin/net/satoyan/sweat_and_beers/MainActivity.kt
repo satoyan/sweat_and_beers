@@ -1,4 +1,4 @@
-package com.example.sweat_and_beers
+package net.satoyan.sweat_and_beers
 
 import io.flutter.embedding.android.FlutterActivity
 

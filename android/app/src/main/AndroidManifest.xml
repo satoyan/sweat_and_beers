@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
-        android:label="sweat_and_beers"
+        android:label="Sweat & Beers"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
