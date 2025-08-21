@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-  namespace = "com.example.sweat_and_beers"
+  namespace = "net.satoyan.sweat_and_beers"
   compileSdk = flutter.compileSdkVersion
   ndkVersion = flutter.ndkVersion
 
