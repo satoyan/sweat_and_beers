@@ -49,3 +49,4 @@ GEMINI.md
 commit_message.txt
 .env
 .local/
+keystore.jks
