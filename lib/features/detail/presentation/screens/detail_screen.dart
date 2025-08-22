@@ -28,6 +28,9 @@ class DetailScreen extends GetView<DetailController> {
       ),
       body: controller.obx(
         (details) {
+          if (details != null && details.photos.isNotEmpty) {
+            controller.precacheImages(context, details.photos);
+          }
           // Display detailed information using 'details' object
           return SingleChildScrollView(
             padding: const EdgeInsets.all(s16),

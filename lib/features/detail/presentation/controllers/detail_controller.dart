@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
+import 'package:sweat_and_beers/core/utils/google_maps_utils.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:sweat_and_beers/features/detail/domain/usecases/get_place_details_usecase.dart';
 
@@ -88,6 +90,13 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     } else {
       logger.e('Could not launch URL', error: 'Could not launch $url');
       Get.snackbar('Error', 'Could not launch URL');
+    }
+  }
+
+  void precacheImages(BuildContext context, List<Photo> photos) {
+    for (final photo in photos) {
+      final imageUrl = buildGoogleMapsPhotoUrl(photo.photoReference);
+      precacheImage(CachedNetworkImageProvider(imageUrl), context);
     }
   }
 }
