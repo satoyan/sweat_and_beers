@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sweat_and_beers/core/utils/google_maps_utils.dart';
 import 'package:sweat_and_beers/features/detail/presentation/controllers/detail_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:sweat_and_beers/core/constants/app_spacing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
