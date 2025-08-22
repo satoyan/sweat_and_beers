@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sweat_and_beers/core/utils/logger.dart';
@@ -20,6 +21,8 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
 
   late PageController _pageController;
   PageController get pageController => _pageController;
+
+  late GoogleMapController mapController;
 
   @override
   void onInit() {
@@ -44,6 +47,10 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
 
   void onPageChanged(int index) {
     _currentPage.value = index;
+  }
+
+  void onMapCreated(GoogleMapController controller) {
+    mapController = controller;
   }
 
   Future<void> _fetchPlaceDetails(String placeId) async {

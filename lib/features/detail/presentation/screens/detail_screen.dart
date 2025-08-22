@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sweat_and_beers/core/utils/google_maps_utils.dart';
 import 'package:sweat_and_beers/features/detail/presentation/controllers/detail_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sweat_and_beers/core/constants/app_spacing.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -114,6 +115,32 @@ class DetailScreen extends GetView<DetailController> {
                         ),
                       ),
                     ],
+                  ),
+                const SizedBox(height: s8),
+
+                // Map View
+                if (details.geometry != null)
+                  SizedBox(
+                    height: 200,
+                    child: GoogleMap(
+                      onMapCreated: controller.onMapCreated,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                          details.geometry!.location.lat,
+                          details.geometry!.location.lng,
+                        ),
+                        zoom: 15,
+                      ),
+                      markers: {
+                        Marker(
+                          markerId: MarkerId(details.placeId),
+                          position: LatLng(
+                            details.geometry!.location.lat,
+                            details.geometry!.location.lng,
+                          ),
+                        ),
+                      },
+                    ),
                   ),
                 const SizedBox(height: s8),
 
