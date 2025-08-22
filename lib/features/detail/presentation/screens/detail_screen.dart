@@ -158,14 +158,7 @@ class DetailScreen extends GetView<DetailController> {
                 // Website
                 if (details.website != null)
                   InkWell(
-                    onTap: () async {
-                      final uri = Uri.parse(details.website!);
-                      if (await canLaunchUrl(uri)) {
-                        await launchUrl(uri);
-                      } else {
-                        Get.snackbar('Error', 'Could not launch website');
-                      }
-                    },
+                    onTap: () => controller.openUrl(details.website!),
                     child: Text(
                       '${l10n.websiteLabel}: ${details.website}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -274,6 +267,11 @@ class DetailScreen extends GetView<DetailController> {
                           ),
                         ),
                       ),
+                      if (details.url != null)
+                        TextButton(
+                          onPressed: () => controller.openUrl(details.url!),
+                          child: Text(l10n.seeAllReviews),
+                        ),
                     ],
                   ),
               ],

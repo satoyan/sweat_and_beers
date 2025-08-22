@@ -65,23 +65,22 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     if (mapAddress.isNotEmpty) {
       final query = Uri.encodeComponent(mapAddress);
       final url = 'https://www.google.com/maps/search/?api=1&query=$query';
-      final uri = Uri.parse(url);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-      } else {
-        logger.e('Could not launch map', error: 'Could not launch map');
-        Get.snackbar('Error', 'Could not launch map');
-      }
+      await openUrl(url);
     }
   }
 
   Future<void> launchPhone(String phoneNumber) async {
     final Uri uri = Uri(scheme: "tel", path: phoneNumber);
+    await openUrl(uri.toString());
+  }
+
+  Future<void> openUrl(String url) async {
+    final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      logger.e('Could not launch phone', error: 'Could not launch phone');
-      Get.snackbar('Error', 'Could not launch phone');
+      logger.e('Could not launch URL', error: 'Could not launch $url');
+      Get.snackbar('Error', 'Could not launch URL');
     }
   }
 }

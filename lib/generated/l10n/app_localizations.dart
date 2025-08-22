@@ -274,6 +274,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Permanently Closed'**
   String get permanentlyClosed;
+
+  /// No description provided for @seeAllReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'See all reviews'**
+  String get seeAllReviews;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -107,4 +107,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get permanentlyClosed => '永続的に閉鎖';
+
+  @override
+  String get seeAllReviews => 'すべてのレビューを見る';
 }
