@@ -51,4 +51,3 @@ commit_message.txt
 .local/
 keystore.jks
 android/kls_database.db
-ios/Runner.xcodeproj/xcshareddata/xcschemes/local.xcscheme
