@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'package:map_launcher/map_launcher.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
@@ -71,10 +75,54 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
   Future<void> launchMap({String? address}) async {
     final mapAddress =
         address ?? state?.formattedAddress ?? place?.address ?? '';
-    if (mapAddress.isNotEmpty) {
+    Location? coords;
+    if (state?.geometry?.location != null) {
+      coords = state!.geometry!.location;
+    } else if (place?.latitude != null && place?.longitude != null) {
+      coords = Location(lat: place!.latitude!, lng: place!.longitude!);
+    }
+
+    if (coords != null) {
+      final availableMaps = await MapLauncher.installedMaps;
+      final localCoords = coords;
+
+      showModalBottomSheet(
+        context: Get.context!,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Wrap(
+                children: [
+                  for (final map in availableMaps)
+                    ListTile(
+                      textColor: context.theme.colorScheme.primary,
+                      onTap: () => map.showMarker(
+                        coords: Coords(localCoords.lat, localCoords.lng),
+                        title: mapAddress,
+                      ),
+                      title: Text(map.mapName),
+                      leading: SvgPicture.asset(
+                        map.icon,
+                        height: 30.0,
+                        width: 30.0,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    } else if (mapAddress.isNotEmpty) {
+      // Fallback to the previous implementation if no coords are available
       final query = Uri.encodeComponent(mapAddress);
-      final url = 'https://www.google.com/maps/search/?api=1&query=$query';
-      await openUrl(url);
+      if (Platform.isIOS) {
+        final url = 'maps://?q=$query';
+        await openUrl(url);
+      } else {
+        final url = 'https://www.google.com/maps/search/?api=1&query=$query';
+        await openUrl(url);
+      }
     }
   }
 
@@ -100,3 +148,4 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     }
   }
 }
+

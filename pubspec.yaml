@@ -48,6 +48,8 @@ dependencies:
   flutter_gen: any
   shared_preferences: ^2.5.3
   cached_network_image: ^3.3.1
+  map_launcher: ^4.4.0
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
