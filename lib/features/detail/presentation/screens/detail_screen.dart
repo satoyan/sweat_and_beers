@@ -290,30 +290,30 @@ class _Reviews extends GetView<DetailController> {
                 spacing: s8,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    // For author and stars
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        review.authorName,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium, // Slightly larger font
-                      ),
-                      Row(
-                        // Star rating
-                        children: List.generate(5, (index) {
-                          return Icon(
-                            index < (review.rating.floor())
-                                ? Icons.star
-                                : Icons.star_border,
-                            color: Theme.of(context).colorScheme.secondary,
-                            size: s16,
-                          );
-                        }),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   // For author and stars
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       review.authorName,
+                  //       style: Theme.of(
+                  //         context,
+                  //       ).textTheme.titleMedium, // Slightly larger font
+                  //     ),
+                  //     Row(
+                  //       // Star rating
+                  //       children: List.generate(5, (index) {
+                  //         return Icon(
+                  //           index < (review.rating.floor())
+                  //               ? Icons.star
+                  //               : Icons.star_border,
+                  //           color: Theme.of(context).colorScheme.secondary,
+                  //           size: s16,
+                  //         );
+                  //       }),
+                  //     ),
+                  //   ],
+                  // ),
                   Text(
                     review.text,
                     style: Theme.of(context).textTheme.bodyMedium,
