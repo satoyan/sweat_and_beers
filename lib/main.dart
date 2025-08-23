@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
         Locale('en', ''), // English
         Locale('ja', ''), // Japanese
       ],
-      locale: const Locale('ja', ''), // Default to Japanese
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('en', ''),
     );
   }
 }
