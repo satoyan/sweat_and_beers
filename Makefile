@@ -33,5 +33,9 @@ distribute-dev:
 	flutter build apk --flavor dev --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 	firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app $(FIREBASE_APP_ID_DEV) --groups "testers"
 
+distribute-ios-dev:
+	flutter build ipa --release --flavor dev --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+	# firebase appdistribution:distribute build/ios/ipa/Sweat& Beers.ipa --app $(FIREBASE_APP_ID_DEV) --groups "testers"
+
 build_aab_release:
 	flutter build appbundle --flavor prod --release --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
