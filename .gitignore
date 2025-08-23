@@ -51,3 +51,5 @@ commit_message.txt
 .local/
 keystore.jks
 android/kls_database.db
+.env.bak
+ios/GoogleService-Info.plist
