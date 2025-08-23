@@ -12,15 +12,20 @@ android {
 
   flavorDimensions("app")
 
+  var appName = "Sweat & Beers"
+  var flavors = listOf("local", "dev", "prod")
+
   productFlavors {
-    create("dev") {
-      dimension = "app"
-      applicationIdSuffix = ".dev"
-      resValue("string", "app_name", "Sweat & Beers (Dev)")
-    }
-    create("prod") {
-      dimension = "app"
-      resValue("string", "app_name", "Sweat & Beers")
+    flavors.forEach { flavor ->
+      create(flavor) {
+        dimension = "app"
+        applicationIdSuffix = ".${flavor}"
+        resValue(
+          type="string",
+          name="app_name",
+          value = "${appName}-${flavor}"
+        )
+      }
     }
   }
 
@@ -32,11 +37,7 @@ android {
   kotlinOptions { jvmTarget = JavaVersion.VERSION_11.toString() }
 
   defaultConfig {
-    // TODO: Specify your own unique Application ID
-    // (https://developer.android.com/studio/build/application-id.html).
     applicationId = "net.satoyan.sweat_and_beers"
-    // You can update the following values to match your application needs.
-    // For more information, see: https://flutter.dev/to/review-gradle-config.
     minSdk = flutter.minSdkVersion
     targetSdk = flutter.targetSdkVersion
     versionCode = flutter.versionCode
@@ -55,8 +56,10 @@ android {
 
   buildTypes {
     release {
-      // TODO: Add your own signing config for the release build.
-      // Signing with the debug keys for now, so `flutter run --release` works.
+      signingConfig = signingConfigs.getByName("release")
+    }
+
+    debug {
       signingConfig = signingConfigs.getByName("release")
     }
   }

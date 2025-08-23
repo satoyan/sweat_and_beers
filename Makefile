@@ -4,16 +4,10 @@
 # Use `make run-dev` or `make run-prod` to be explicit.
 # You need to have GOOGLE_PLACES_API_KEY environment variable set.
 # Example: export GOOGLE_PLACES_API_KEY="your_api_key"
-run: run-dev
+run: run-local
 
-run-dev:
-	flutter run --flavor dev --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
-
-run-prod:
-	flutter run --flavor prod --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
-
-build:
-	flutter build apk
+run-local:
+	flutter run --flavor local --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 
 analyze:
 	flutter analyze
