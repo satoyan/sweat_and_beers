@@ -50,3 +50,4 @@ commit_message.txt
 .env
 .local/
 keystore.jks
+android/kls_database.db
