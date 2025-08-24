@@ -31,9 +31,6 @@ class DetailScreen extends GetView<DetailController> {
       ),
       body: controller.obx(
         (details) {
-          if (details != null && details.photos.isNotEmpty) {
-            controller.precacheImages(context, details.photos);
-          }
           // Display detailed information using 'details' object
           return SingleChildScrollView(
             padding: const EdgeInsets.all(s16),
@@ -78,7 +75,7 @@ class _PhotoGallery extends GetView<DetailController> {
           height: s200, // Fixed height for the PageView
           child: PageView.builder(
             controller: controller.pageController,
-            itemCount: details.photos.length,
+            itemCount: details.photos.length > 2 ? 2 : details.photos.length,
             onPageChanged: controller.onPageChanged,
             itemBuilder: (context, index) {
               final photoReference = details.photos[index].photoReference;
@@ -96,24 +93,27 @@ class _PhotoGallery extends GetView<DetailController> {
         Obx(
           () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(details.photos.length, (index) {
-              return Container(
-                width: s8,
-                height: s8,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: s4,
-                  vertical: s16,
-                ),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: controller.currentPage == index
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withAlpha((255 * 0.5).round()),
-                ),
-              );
-            }),
+            children: List.generate(
+              details.photos.length > 2 ? 2 : details.photos.length,
+              (index) {
+                return Container(
+                  width: s8,
+                  height: s8,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: s4,
+                    vertical: s16,
+                  ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: controller.currentPage == index
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurface.withAlpha(
+                            (255 * 0.5).round(),
+                          ),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],

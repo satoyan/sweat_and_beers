@@ -140,11 +140,4 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
       Get.snackbar('Error', 'Could not launch URL');
     }
   }
-
-  void precacheImages(BuildContext context, List<Photo> photos) {
-    for (final photo in photos) {
-      final imageUrl = buildGoogleMapsPhotoUrl(photo.photoReference);
-      precacheImage(CachedNetworkImageProvider(imageUrl), context);
-    }
-  }
 }
