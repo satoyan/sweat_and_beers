@@ -27,9 +27,6 @@ class SearchController extends GetxController
 
   Position? get currentPosition => _currentPosition.value;
 
-  final _radius = 500.0.obs;
-  double get radius => _radius.value;
-
   final _themeMode = ThemeMode.system.obs;
   ThemeMode get themeMode => _themeMode.value;
 
@@ -44,10 +41,6 @@ class SearchController extends GetxController
   void onInit() {
     super.onInit();
     fetchLocationAndSearch();
-  }
-
-  void onRadiusChanged(double value) {
-    _radius.value = value;
   }
 
   Future<void> fetchLocationAndSearch() async {
@@ -77,11 +70,11 @@ class SearchController extends GetxController
 
     final query = _settingsController.searchKeyword;
     try {
-      logger.d('radius: $radius');
+      logger.d('radius: ${_settingsController.radius}');
       final results = await _searchPlacesUseCase.call(
         query,
         location: currentPosition!,
-        radius: radius.toInt(),
+        radius: _settingsController.radius.toInt(),
       );
       for (var result in results) {
         if (result.latitude != null && result.longitude != null) {

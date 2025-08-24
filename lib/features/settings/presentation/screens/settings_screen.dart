@@ -63,6 +63,23 @@ class SettingsScreen extends GetView<SettingsController> {
                 ),
               ),
             ),
+            ListTile(
+              title: Obx(
+                () => Text(l10n.searchRadius(controller.radius.round())),
+              ),
+            ),
+            Obx(
+              () => Slider(
+                value: controller.radius,
+                min: 100,
+                max: 5000,
+                divisions: 49,
+                label: controller.radius.round().toString(),
+                onChanged: (value) {
+                  controller.changeRadius(value);
+                },
+              ),
+            ),
           ],
         ),
       ),
