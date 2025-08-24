@@ -148,4 +148,3 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     }
   }
 }
-

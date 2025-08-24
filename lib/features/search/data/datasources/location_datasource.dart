@@ -24,9 +24,12 @@ class LocationDataSourceImpl implements LocationRepository {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      logger.e('Location permissions are permanently denied, we cannot request permissions.');
+      logger.e(
+        'Location permissions are permanently denied, we cannot request permissions.',
+      );
       return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+        'Location permissions are permanently denied, we cannot request permissions.',
+      );
     }
 
     return await Geolocator.getCurrentPosition();

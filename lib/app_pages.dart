@@ -15,7 +15,11 @@ class AppPages {
       page: () => const SearchScreen(),
       binding: SearchBinding(),
     ),
-    GetPage(name: AppRoutes.detail, page: () => const DetailScreen(), binding: DetailBinding()),
+    GetPage(
+      name: AppRoutes.detail,
+      page: () => const DetailScreen(),
+      binding: DetailBinding(),
+    ),
     GetPage(name: AppRoutes.signIn, page: () => const SignInScreen()),
     GetPage(
       name: AppRoutes.settings,

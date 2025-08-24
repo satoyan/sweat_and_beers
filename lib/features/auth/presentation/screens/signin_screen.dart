@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sweat_and_beers/features/auth/presentation/controllers/signin_controller.dart';
@@ -14,9 +13,7 @@ class SignInScreen extends StatelessWidget {
       init: SignInController(),
       builder: (controller) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(l10n.signInScreenTitle),
-          ),
+          appBar: AppBar(title: Text(l10n.signInScreenTitle)),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

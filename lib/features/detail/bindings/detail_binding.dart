@@ -11,13 +11,17 @@ class DetailBinding extends Bindings {
       () => GooglePlacesDetailsApiDataSource(),
     );
     Get.lazyPut<PlaceDetailsRepositoryImpl>(
-      () => PlaceDetailsRepositoryImpl(Get.find<GooglePlacesDetailsApiDataSource>()),
+      () => PlaceDetailsRepositoryImpl(
+        Get.find<GooglePlacesDetailsApiDataSource>(),
+      ),
     );
     Get.lazyPut<GetPlaceDetailsUseCase>(
       () => GetPlaceDetailsUseCase(Get.find<PlaceDetailsRepositoryImpl>()),
     );
     Get.lazyPut<DetailController>(
-      () => DetailController(getPlaceDetailsUseCase: Get.find<GetPlaceDetailsUseCase>()),
+      () => DetailController(
+        getPlaceDetailsUseCase: Get.find<GetPlaceDetailsUseCase>(),
+      ),
     );
   }
 }
