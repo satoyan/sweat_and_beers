@@ -14,7 +14,18 @@ class GooglePlacesDetailsApiDataSource {
       final response = await _places.getDetailsByPlaceId(
         placeId,
         language: Get.locale?.languageCode ?? 'en',
+        // fields: const [
+        //   'name',
+        //   'formatted_address',
+        //   'geometry',
+        //   'place_id',
+        //   'url',
+        //   'photo',
+        //   'formatted_phone_number',
+        //   'business_status',
+        // ],
       );
+
       if (response.status == 'OK') {
         return response.result;
       } else {
