@@ -1,7 +1,10 @@
+
+
 import 'dart:io';
-import 'package:map_launcher/map_launcher.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:map_launcher/map_launcher.dart';
+
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -82,34 +85,9 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
 
     if (coords != null) {
       final availableMaps = await MapLauncher.installedMaps;
-      final localCoords = coords;
-
-      showModalBottomSheet(
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return SafeArea(
-            child: SingleChildScrollView(
-              child: Wrap(
-                children: [
-                  for (final map in availableMaps)
-                    ListTile(
-                      textColor: context.theme.colorScheme.primary,
-                      onTap: () => map.showMarker(
-                        coords: Coords(localCoords.lat, localCoords.lng),
-                        title: mapAddress,
-                      ),
-                      title: Text(map.mapName),
-                      leading: SvgPicture.asset(
-                        map.icon,
-                        height: 30.0,
-                        width: 30.0,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          );
-        },
+      await availableMaps.first.showMarker(
+        coords: Coords(coords.lat, coords.lng),
+        title: mapAddress,
       );
     } else if (mapAddress.isNotEmpty) {
       // Fallback to the previous implementation if no coords are available
@@ -139,3 +117,7 @@ class DetailController extends GetxController with StateMixin<PlaceDetails> {
     }
   }
 }
+
+
+
+

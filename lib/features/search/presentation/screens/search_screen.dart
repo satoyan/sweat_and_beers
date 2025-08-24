@@ -65,8 +65,9 @@ class SearchScreen extends GetView<SearchController> {
                       final place = state[index];
                       return SearchResultCard(
                         place: place,
-                        onTap: () =>
-                            Get.toNamed(AppRoutes.detail, arguments: place),
+                        onTap: () {
+                          Get.toNamed(AppRoutes.detail, arguments: place);
+                        },
                       );
                     },
                   );

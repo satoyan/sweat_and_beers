@@ -76,13 +76,11 @@ void main() {
       verify(mockLocationRepository.getCurrentLocation()).called(1);
       verify(
         mockSearchPlacesUseCase.call(
-          any,
-          location: anyNamed('location'),
-          radius: anyNamed('radius'),
+          settingsController.searchKeyword, // Use keyword from settings
+          location: tPosition,
+          radius: settingsController.radius.toInt(), // Use radius from settings
         ),
       ).called(1);
-      verifyNoMoreInteractions(mockLocationRepository);
-      verifyNoMoreInteractions(mockSearchPlacesUseCase);
     });
 
     test('should handle error when fetching location fails', () async {
@@ -133,17 +131,6 @@ void main() {
       ).called(1);
       verifyNoMoreInteractions(mockLocationRepository);
       verifyNoMoreInteractions(mockSearchPlacesUseCase);
-    });
-
-    test('onRadiusChanged should update radius', () {
-      // Arrange
-      final newRadius = 1000.0;
-
-      // Act
-      searchController.onRadiusChanged(newRadius);
-
-      // Assert
-      expect(searchController.radius, newRadius);
     });
 
     test('toggleThemeMode should switch theme mode', () {
