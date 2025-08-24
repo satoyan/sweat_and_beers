@@ -29,11 +29,11 @@ l10n:
 		--output-localization-file=app_localizations.dart \
 		--output-dir=lib/generated/l10n
 
-distribute-dev:
+distribute-dev-android:
 	flutter build apk --release --flavor dev --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 	firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app $(ANDROID_FIREBASE_APP_ID_DEV) --groups "testers"
 
-distribute-ios-dev:
+distribute-dev-ios:
 	flutter build ipa --release \
 		--flavor dev \
 		--export-options-plist=ios/ExportOptions-dev.plist \

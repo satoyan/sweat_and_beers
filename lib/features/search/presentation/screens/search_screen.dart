@@ -51,28 +51,6 @@ class SearchScreen extends GetView<SearchController> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Obx(
-              () => Text(l10n.searchRadius(controller.radius.round())),
-            ),
-          ),
-          Obx(
-            () => Slider(
-              value: controller.radius,
-              min: 100,
-              max: 5000,
-              divisions: 49,
-              label: controller.radius.round().toString(),
-              onChanged: (value) {
-                controller.onRadiusChanged(value);
-              },
-              onChangeEnd: (value) {
-                controller
-                    .fetchLocationAndSearch(); // Re-fetch results when slider stops moving
-              },
-            ),
-          ),
           Expanded(
             child: RefreshIndicator(
               // Wrap with RefreshIndicator
