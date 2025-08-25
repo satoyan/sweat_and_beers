@@ -19,12 +19,13 @@ android {
     flavors.forEach { flavor ->
       create(flavor) {
         dimension = "app"
-        applicationIdSuffix = ".${flavor}"
-        resValue(
-          type="string",
-          name="app_name",
-          value = "${appName}-${flavor}"
-        )
+        if (flavor == "prod") {
+          applicationIdSuffix = ""
+          resValue(type = "string", name = "app_name", value = "${appName}")
+        }else{
+          applicationIdSuffix = ".${flavor}"
+          resValue(type = "string", name = "app_name", value = "${appName}-${flavor}")
+        }
       }
     }
   }
@@ -55,13 +56,9 @@ android {
   }
 
   buildTypes {
-    release {
-      signingConfig = signingConfigs.getByName("release")
-    }
+    release { signingConfig = signingConfigs.getByName("release") }
 
-    debug {
-      signingConfig = signingConfigs.getByName("release")
-    }
+    debug { signingConfig = signingConfigs.getByName("release") }
   }
 }
 

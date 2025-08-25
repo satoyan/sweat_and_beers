@@ -6,8 +6,12 @@
 # Example: export GOOGLE_PLACES_API_KEY="your_api_key"
 run: run-local
 
-run-local:
+run-simple:
 	flutter run --flavor local --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+
+run-local:
+	flutter run --flavor local --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=FULL_FEATURE_ENABLED=true
 
 analyze:
 	flutter analyze
