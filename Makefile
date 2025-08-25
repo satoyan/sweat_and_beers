@@ -49,4 +49,28 @@ distribute-dev-ios:
 
 
 build_aab_release:
-	flutter build appbundle --flavor prod --release --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+	flutter build appbundle \
+		--flavor prod \
+		--release \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=FULL_FEATURE_ENABLED=true
+
+build_aab_release-simple:
+	flutter build appbundle \
+		--flavor prod \
+		--release \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+
+build_ipa_release:
+	flutter build ipa --release \
+		--flavor dev \
+		--export-options-plist=ios/ExportOptions-dev.plist \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=FULL_FEATURE_ENABLED=true
+
+build_ipa_release_simple:
+	flutter build ipa --release \
+		--flavor dev \
+		--export-options-plist=ios/ExportOptions-dev.plist \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+
