@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
 import 'package:sweat_and_beers/app_routes.dart';
+import 'package:sweat_and_beers/core/config/app_config.dart';
+import 'package:map_launcher/map_launcher.dart';
+
 import 'package:sweat_and_beers/features/search/presentation/controllers/search_controller.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:sweat_and_beers/features/search/presentation/widgets/search_result_card.dart';
@@ -40,12 +43,6 @@ class SearchScreen extends GetView<SearchController> {
                 },
               ),
             ),
-            // IconButton(
-            //   icon: const Icon(Icons.login),
-            //   onPressed: () {
-            //     Get.toNamed(AppRoutes.signIn);
-            //   },
-            // ),
           ],
         ],
       ),
@@ -66,7 +63,21 @@ class SearchScreen extends GetView<SearchController> {
                       return SearchResultCard(
                         place: place,
                         onTap: () {
-                          Get.toNamed(AppRoutes.detail, arguments: place);
+                          if (AppConfig.fullFeatureEnabled) {
+                            Get.toNamed(AppRoutes.detail, arguments: place);
+                          } else {
+                            if (place.latitude != null &&
+                                place.longitude != null) {
+                              MapLauncher.showMarker(
+                                mapType: MapType.google,
+                                coords: Coords(
+                                  place.latitude!,
+                                  place.longitude!,
+                                ),
+                                title: place.title,
+                              );
+                            }
+                          }
                         },
                       );
                     },

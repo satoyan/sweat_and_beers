@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
+
 import 'package:sweat_and_beers/features/search/domain/repositories/location_repository.dart';
 import 'package:sweat_and_beers/features/search/domain/entities/search_result.dart';
 import 'package:sweat_and_beers/features/search/domain/usecases/search_places_usecase.dart';
@@ -7,6 +8,7 @@ import 'package:sweat_and_beers/core/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:sweat_and_beers/features/detail/domain/usecases/get_place_details_usecase.dart';
 import 'package:sweat_and_beers/features/settings/presentation/controllers/settings_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchController extends GetxController
     with StateMixin<List<SearchResult>> {
@@ -70,7 +72,6 @@ class SearchController extends GetxController
 
     final query = _settingsController.searchKeyword;
     try {
-      logger.d('radius: ${_settingsController.radius}');
       final results = await _searchPlacesUseCase.call(
         query,
         location: currentPosition!,
@@ -87,6 +88,14 @@ class SearchController extends GetxController
         }
       }
       if (results.isEmpty) {
+        final lat = currentPosition!.latitude;
+        final lng = currentPosition!.longitude;
+        final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+        if (await canLaunchUrl(Uri.parse(url))) {
+          await launchUrl(Uri.parse(url));
+        } else {
+          Get.snackbar('Error', 'Could not launch map');
+        }
         change([], status: RxStatus.empty());
       } else {
         results.sort((a, b) => a.distance!.compareTo(b.distance!));
