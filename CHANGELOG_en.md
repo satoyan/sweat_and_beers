@@ -1,3 +1,12 @@
+# Sweat & Beers - Version 1.1.0
+
+## New Features and Improvements
+
+*   **Improved Search Result Display:** Redesigned the search result items to be more compact and easier to read by removing the photo from each item.
+*   **Introduced Feature Flag:** Added a `fullFeatureEnabled` flag to control the behavior when a search result is tapped.
+    *   If the flag is `true`, the app navigates to the detail screen.
+    *   If the flag is `false`, the app opens the location in a map application.
+
 # Sweat & Beers - Version 1.0.0
 
 Thank you for using Sweat & Beers!
