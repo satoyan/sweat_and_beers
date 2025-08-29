@@ -47,15 +47,14 @@ distribute-dev-ios:
 		--app $(IOS_FIREBASE_APP_ID_DEV) \
 		--groups "testers"
 
-
-build_aab_release:
+build_aab_dev:
 	flutter build appbundle \
 		--flavor prod \
 		--release \
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
 		--dart-define=FULL_FEATURE_ENABLED=true
 
-build_aab_release-simple:
+build_aab_dev-simple:
 	flutter build appbundle \
 		--flavor prod \
 		--release \
@@ -63,12 +62,25 @@ build_aab_release-simple:
 
 build_ipa_release:
 	flutter build ipa --release \
+		--export-options-plist=ios/ExportOptions-release.plist \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=FULL_FEATURE_ENABLED=true
+
+upload_testflight:
+	xcrun altool --upload-app \
+		-f "build/ios/ipa/Sweat & Beers.ipa" \
+		-t ios \
+		--apiKey $(APP_STORE_CONNECT_API_KEY) \
+		--apiIssuer "$(APP_STORE_CONNECT_API_ISSUER)"
+
+build_ipa_dev:
+	flutter build ipa --release \
 		--flavor dev \
 		--export-options-plist=ios/ExportOptions-dev.plist \
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
 		--dart-define=FULL_FEATURE_ENABLED=true
 
-build_ipa_release_simple:
+build_ipa_dev_simple:
 	flutter build ipa --release \
 		--flavor dev \
 		--export-options-plist=ios/ExportOptions-dev.plist \
