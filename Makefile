@@ -10,7 +10,10 @@ run-simple:
 	flutter run --flavor local --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 
 run-local:
-	flutter run --flavor local --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+	flutter run --flavor local \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID) \
 		--dart-define=FULL_FEATURE_ENABLED=true
 
 analyze:
@@ -34,14 +37,21 @@ l10n:
 		--output-dir=lib/generated/l10n
 
 distribute-dev-android:
-	flutter build apk --release --flavor dev --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+	flutter build apk --release \
+		--flavor dev \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID) 
+
 	firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app $(ANDROID_FIREBASE_APP_ID_DEV) --groups "testers"
 
 distribute-dev-ios:
 	flutter build ipa --release \
 		--flavor dev \
 		--export-options-plist=ios/ExportOptions-dev.plist \
-		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID) 
 
 	firebase appdistribution:distribute build/ios/ipa/Sweat\ \&\ Beers.ipa \
 		--app $(IOS_FIREBASE_APP_ID_DEV) \
@@ -52,18 +62,24 @@ build_aab_dev:
 		--flavor prod \
 		--release \
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
 		--dart-define=FULL_FEATURE_ENABLED=true
 
 build_aab_dev-simple:
 	flutter build appbundle \
 		--flavor prod \
 		--release \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 
 build_ipa_release:
 	flutter build ipa --release \
 		--export-options-plist=ios/ExportOptions-release.plist \
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
 		--dart-define=FULL_FEATURE_ENABLED=true
 
 upload_testflight:
@@ -78,11 +94,15 @@ build_ipa_dev:
 		--flavor dev \
 		--export-options-plist=ios/ExportOptions-dev.plist \
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
 		--dart-define=FULL_FEATURE_ENABLED=true
 
 build_ipa_dev_simple:
 	flutter build ipa --release \
 		--flavor dev \
 		--export-options-plist=ios/ExportOptions-dev.plist \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 

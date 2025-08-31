@@ -1,17 +1,17 @@
-import 'dart:io';
-
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:sweat_and_beers/core/utils/logger.dart';
 
 class MyBannerAd extends StatefulWidget {
   /// The requested size of the banner. Defaults to [AdSize.banner].
   final AdSize adSize;
+  final String adUnitId;
 
-  final String adUnitId = Platform.isAndroid
-      ? ''
-      : 'ca-app-pub-3222030198204445/8730094498';
-
-  MyBannerAd({super.key, this.adSize = AdSize.banner});
+  const MyBannerAd({
+    super.key,
+    this.adSize = AdSize.banner,
+    required this.adUnitId,
+  });
 
   @override
   State<MyBannerAd> createState() => _MyBannerAdState();
@@ -23,13 +23,14 @@ class _MyBannerAdState extends State<MyBannerAd> {
 
   @override
   Widget build(BuildContext context) {
+    logger.d(widget.adUnitId);
     return SafeArea(
       child: SizedBox(
         width: widget.adSize.width.toDouble(),
         height: widget.adSize.height.toDouble(),
         child: _bannerAd == null
             // Nothing to render yet.
-            ? const SizedBox()
+            ? const Center(child: CircularProgressIndicator())
             // The actual ad.
             : AdWidget(ad: _bannerAd!),
       ),

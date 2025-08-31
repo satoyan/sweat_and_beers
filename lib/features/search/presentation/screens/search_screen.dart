@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -92,13 +94,14 @@ class SearchScreen extends GetView<SearchController> {
                 ),
               ),
             ),
-            MyBannerAd(adSize: AdSize.banner),
+            MyBannerAd(
+              adSize: AdSize.banner,
+              adUnitId: Platform.isIOS
+                  ? AppConfig.adUnitIdIos
+                  : AppConfig.adUnitIdIAndroid,
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.fetchLocationAndSearch(),
-        child: const Icon(Icons.search),
       ),
     );
   }
