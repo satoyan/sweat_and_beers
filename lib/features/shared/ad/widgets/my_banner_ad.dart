@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:sweat_and_beers/core/utils/logger.dart';
 
 class MyBannerAd extends StatefulWidget {
   /// The requested size of the banner. Defaults to [AdSize.banner].
@@ -20,18 +19,26 @@ class MyBannerAd extends StatefulWidget {
 class _MyBannerAdState extends State<MyBannerAd> {
   /// The banner ad to show. This is `null` until the ad is actually loaded.
   BannerAd? _bannerAd;
+  bool _isAdFailedToLoad = false;
 
   @override
   Widget build(BuildContext context) {
-    logger.d(widget.adUnitId);
+    if (_isAdFailedToLoad) {
+      return Container(
+        width: widget.adSize.width.toDouble(),
+        height: widget.adSize.height.toDouble(),
+        color: Colors.grey[300],
+        child: const Center(
+          child: Text('Ad Banner Here'),
+        ),
+      );
+    }
     return SafeArea(
       child: SizedBox(
         width: widget.adSize.width.toDouble(),
         height: widget.adSize.height.toDouble(),
         child: _bannerAd == null
-            // Nothing to render yet.
             ? const Center(child: CircularProgressIndicator())
-            // The actual ad.
             : AdWidget(ad: _bannerAd!),
       ),
     );
@@ -51,7 +58,7 @@ class _MyBannerAdState extends State<MyBannerAd> {
 
   /// Loads a banner ad.
   void _loadAd() {
-    final bannerAd = BannerAd(
+    _bannerAd = BannerAd(
       size: widget.adSize,
       adUnitId: widget.adUnitId,
       request: const AdRequest(),
@@ -70,11 +77,14 @@ class _MyBannerAdState extends State<MyBannerAd> {
         onAdFailedToLoad: (ad, error) {
           debugPrint('BannerAd failed to load: $error');
           ad.dispose();
+          setState(() {
+            _isAdFailedToLoad = true;
+          });
         },
       ),
     );
 
     // Start loading.
-    bannerAd.load();
+    _bannerAd?.load();
   }
 }
