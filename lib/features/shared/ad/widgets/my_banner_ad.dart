@@ -28,9 +28,7 @@ class _MyBannerAdState extends State<MyBannerAd> {
         width: widget.adSize.width.toDouble(),
         height: widget.adSize.height.toDouble(),
         color: Colors.grey[300],
-        child: const Center(
-          child: Text('Ad Banner Here'),
-        ),
+        child: const Center(child: Text('Ad Banner Here')),
       );
     }
     return SafeArea(

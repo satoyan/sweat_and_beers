@@ -81,8 +81,8 @@ build_ipa_release:
 	flutter build ipa --release \
 		--export-options-plist=ios/ExportOptions-release.plist \
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
-		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \ 
-		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID) \
 		--dart-define=FULL_FEATURE_ENABLED=true
 
 upload_testflight:
