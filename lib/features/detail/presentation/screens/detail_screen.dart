@@ -108,9 +108,7 @@ class _PhotoGallery extends GetView<DetailController> {
                     shape: BoxShape.circle,
                     color: controller.currentPage == index
                         ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.onSurface.withAlpha(
-                            (255 * 0.5).round(),
-                          ),
+                        : Theme.of(context).colorScheme.onSurface.withAlpha(128),
                   ),
                 );
               },
@@ -307,7 +305,7 @@ class _Reviews extends GetView<DetailController> {
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(
                             context,
-                          ).colorScheme.onSurface.withOpacity(0.6),
+                          ).colorScheme.onSurface.withAlpha(153),
                         ),
                       ),
                     ),

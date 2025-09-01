@@ -61,31 +61,48 @@ class SearchScreen extends GetView<SearchController> {
                 },
                 child: controller.obx(
                   (state) {
-                    return ListView.builder(
-                      itemCount: state!.length,
-                      itemBuilder: (context, index) {
-                        final place = state[index];
-                        return SearchResultCard(
-                          place: place,
-                          onTap: () {
-                            if (AppConfig.fullFeatureEnabled) {
-                              Get.toNamed(AppRoutes.detail, arguments: place);
-                            } else {
-                              if (place.latitude != null &&
-                                  place.longitude != null) {
-                                MapLauncher.showMarker(
-                                  mapType: MapType.google,
-                                  coords: Coords(
-                                    place.latitude!,
-                                    place.longitude!,
-                                  ),
-                                  title: place.title,
-                                );
-                              }
-                            }
-                          },
-                        );
+                    return ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Theme.of(context).scaffoldBackgroundColor,
+                            Theme.of(context).scaffoldBackgroundColor.withAlpha(0),
+                          ],
+                          stops: const [0.9, 1.0],
+                        ).createShader(bounds);
                       },
+                      blendMode: BlendMode.dstIn,
+                      child: ListView.builder(
+                        itemCount: state!.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == state.length) {
+                            return const SizedBox(height: 64.0);
+                          }
+                          final place = state[index];
+                          return SearchResultCard(
+                            place: place,
+                            onTap: () {
+                              if (AppConfig.fullFeatureEnabled) {
+                                Get.toNamed(AppRoutes.detail, arguments: place);
+                              } else {
+                                if (place.latitude != null &&
+                                    place.longitude != null) {
+                                  MapLauncher.showMarker(
+                                    mapType: MapType.google,
+                                    coords: Coords(
+                                      place.latitude!,
+                                      place.longitude!,
+                                    ),
+                                    title: place.title,
+                                  );
+                                }
+                              }
+                            },
+                          );
+                        },
+                      ),
                     );
                   },
                   onLoading: const Center(child: CircularProgressIndicator()),
