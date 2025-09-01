@@ -1,84 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  static const Color _primaryColor = Color(0xFF3D405B);
+  static const Color _secondaryColor = Color(0xFF81B29A);
+  static const Color _backgroundColor = Color(0xFFF4F1DE);
+  static const Color _errorColor = Color(0xFFE07A5F);
+
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.blue,
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
-    ),
-    textTheme: TextTheme(
-      headlineSmall: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ), // For titles
-      bodyLarge: TextStyle(fontSize: 14, color: Colors.black), // General text
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: Colors.black,
-      ), // Secondary text
-      labelLarge: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-      ), // For buttons or emphasized text
-    ),
-    cardTheme: CardThemeData(
-      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-    ),
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
-      secondary: Colors.amber,
-      error: Colors.red,
-      surface: Colors.grey[300],
-      onSurface: Colors.black,
+    primaryColor: _primaryColor,
+    colorScheme: const ColorScheme.light(
+      primary: _primaryColor,
+      secondary: _secondaryColor,
+      surface: _backgroundColor,
+      error: _errorColor,
       onPrimary: Colors.white,
       onSecondary: Colors.black,
+      onSurface: Colors.black,
       onError: Colors.white,
+    ),
+    textTheme: GoogleFonts.ralewayTextTheme(
+      ThemeData.light().textTheme,
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: _primaryColor,
+      foregroundColor: Colors.white,
+    ),
+    cardTheme: CardThemeData(
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
     ),
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: Colors.blueGrey,
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.blueGrey[700],
+    primaryColor: _primaryColor,
+    colorScheme: const ColorScheme.dark(
+      primary: _primaryColor,
+      secondary: _secondaryColor,
+      surface: Color(0xFF121212),
+      error: _errorColor,
+      onPrimary: Colors.white,
+      onSecondary: Colors.black,
+      onSurface: Colors.white,
+      onError: Colors.white,
+    ),
+    textTheme: GoogleFonts.ralewayTextTheme(
+      ThemeData.dark().textTheme,
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: _primaryColor,
       foregroundColor: Colors.white,
     ),
-    textTheme: TextTheme(
-      headlineSmall: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ), // For titles
-      bodyLarge: TextStyle(fontSize: 14, color: Colors.white70), // General text
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: Colors.white60,
-      ), // Secondary text
-      labelLarge: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ), // For buttons or emphasized text
-    ),
     cardTheme: CardThemeData(
-      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       elevation: 4.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      color: Colors.grey[850],
     ),
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey)
-        .copyWith(
-          secondary: Colors.amberAccent,
-          error: Colors.redAccent,
-          surface: Colors.grey[800],
-          onSurface: Colors.white70,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onError: Colors.white,
-          brightness: Brightness.dark,
-        ),
   );
 }

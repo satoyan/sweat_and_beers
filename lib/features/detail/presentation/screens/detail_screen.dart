@@ -107,7 +107,7 @@ class _PhotoGallery extends GetView<DetailController> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: controller.currentPage == index
-                        ? Theme.of(context).colorScheme.primary
+                        ? Theme.of(context).colorScheme.secondary
                         : Theme.of(context).colorScheme.onSurface.withAlpha(
                             (255 * 0.5).round(),
                           ),
@@ -145,7 +145,10 @@ class _ShopInfo extends GetView<DetailController> {
                 ),
               ),
               TextButton.icon(
-                label: Text(l10n.map),
+                label: Text(
+                  l10n.map,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 icon: Icon(
                   Icons.location_pin,
                   color: Theme.of(context).colorScheme.onSurface,
@@ -193,7 +196,7 @@ class _ShopInfo extends GetView<DetailController> {
             child: Text(
               '${l10n.phoneLabel}: ${details.formattedPhoneNumber}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
                 decoration: TextDecoration.underline,
               ),
             ),
@@ -227,7 +230,7 @@ class _ShopInfo extends GetView<DetailController> {
             child: Text(
               '${l10n.websiteLabel}: ${details.website}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
                 decoration: TextDecoration.underline,
               ),
             ),
@@ -302,8 +305,9 @@ class _Reviews extends GetView<DetailController> {
                       child: Text(
                         timeDescription,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface
-                              .withAlpha((255 * 0.6).round()),
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withOpacity(0.6),
                         ),
                       ),
                     ),
