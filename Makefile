@@ -109,3 +109,5 @@ build_ipa_dev_simple:
 		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)\
 		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
 
+increment_build_number:
+	./scripts/increment_build_number.sh
