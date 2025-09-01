@@ -7,7 +7,10 @@
 run: run-local
 
 run-simple:
-	flutter run --flavor local --dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY)
+	flutter run --flavor local \
+		--dart-define=GOOGLE_PLACES_API_KEY=$(GOOGLE_PLACES_API_KEY) \
+		--dart-define=GOOGLE_AD_UNIT_ID_IOS=$(GOOGLE_AD_UNIT_ID_IOS) \
+		--dart-define=GOOGLE_AD_UNIT_ID_ANDROID=$(GOOGLE_AD_UNIT_ID_ANDROID)
 
 run-local:
 	flutter run --flavor local \

@@ -11,7 +11,6 @@ import 'package:sweat_and_beers/features/search/presentation/controllers/search_
 import 'package:sweat_and_beers/features/shared/ad/widgets/my_banner_ad.dart';
 import 'package:sweat_and_beers/generated/l10n/app_localizations.dart';
 import 'package:sweat_and_beers/features/search/presentation/widgets/search_result_card.dart';
-import 'package:flutter/foundation.dart';
 import 'package:sweat_and_beers/features/settings/presentation/screens/settings_screen.dart';
 import 'package:sweat_and_beers/features/settings/bindings/settings_binding.dart';
 
@@ -23,7 +22,18 @@ class SearchScreen extends GetView<SearchController> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.appTitle),
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Image.asset(
+                'assets/icon/icon.png',
+                height: 32,
+              ),
+            ),
+            Text(l10n.appTitle),
+          ],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -38,16 +48,6 @@ class SearchScreen extends GetView<SearchController> {
               }
             },
           ),
-          if (kDebugMode) ...[
-            Obx(
-              () => Switch(
-                value: controller.themeMode == ThemeMode.dark,
-                onChanged: (value) {
-                  controller.toggleThemeMode();
-                },
-              ),
-            ),
-          ],
         ],
       ),
       body: SafeArea(
